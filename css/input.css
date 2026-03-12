@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+
+/*importing fonts*/
+@import url('https://fonts.googleapis.com/css2?family=Miriam+Libre:wght@400..700&display=swap');
+
+
+
+/*Adding colors*/
+@theme{
+    --color-button: #FFDF78;
+    --color-hover: #00AAFF;
+}
+
+/*Adding fonts*/
+@theme{
+    --font-libre: "Miriam Libre", sans-serif;
+}
