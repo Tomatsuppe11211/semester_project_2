@@ -1,22 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bidly.com/listings</title>
     <link rel="stylesheet" href="../css/style.css">
+    <script src="listings.js" defer></script>
 </head>
-<body>
-    <header class="flex flex-row p-2 relative w-screen border-b items-center">
+<body class="flex min-h-full flex-col">
+    <header class="flex flex-row items-center justify-between p-2 w-screen border-b">
         <!--logo-->
-        <img src="../images/bidly-logo.png" class="h-15 ml-5">
+        <img src="../images/bidly-logo.png" class="h-15 ml-10">
 
         <!--Searchbar-->
-        <div class="flex flex-row items-center justify-evenly border rounded-lg h-8">
+        <div class="flex flex-row border rounded-lg h-8">
             <input 
                 type="text"
                 id="searchinput"
-                class="w-40 focus:border-none h-full"
+                class="w-50 focus:border-none h-full"
             >
 
             <div class="flex items-center justify-center border-l h-full w-10 hover:bg-hover hover:text-white hover:rounded-tr-lg hover:rounded-br-lg cursor-pointer">
@@ -38,17 +39,89 @@
             
         </div>
 
-
         <!--desktop navigation for logged out users-->
-        <nav>
+        <nav class="hidden md:flex flex-row justify-evenly">
             <a href="#" class="underline text-hover font-bold">Listings</a>
             <a href="#" class="hover:underline hover:text-hover hover:font-bold">Login</a>
             <a href="#" class="hover:underline hover:text-hover hover:font-bold">Register</a>
         </nav>
 
         <!--Desktop navigation for logged in users-->
-        <nav></nav>
+        <nav class="hidden md:flex flex-row">
+            <a href="#" class="underline text-hover font-bold">Listings</a>
 
+            <!--sun icon-->
+            <a href="#" class="hover:underline hover:text-hover hover:font-bold">
+                <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke-width="1.5" 
+                    stroke="currentColor" 
+                    class="size-6"
+                >
+                    <path 
+                        stroke-linecap="round" 
+                        stroke-linejoin="round" 
+                        d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
+                    />
+                </svg>
+            </a>
+
+            <!--add icon (plus)-->
+            <a href="#" class="hover:underline hover:text-hover hover:font-bold">
+                <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke-width="1.5" 
+                    stroke="currentColor" 
+                    class="size-6"
+                >
+                    <path 
+                        stroke-linecap="round" 
+                        stroke-linejoin="round" 
+                        d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" 
+                    />
+                </svg>
+            </a>
+
+            <!--profile icon-->
+            <a href="#" class="hover:underline hover:text-hover hover:font-bold">
+                <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke-width="1.5" 
+                    stroke="currentColor" 
+                    class="size-6"
+                >
+                    <path 
+                        stroke-linecap="round" 
+                        stroke-linejoin="round" 
+                        d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" 
+                    />
+                </svg>
+            </a>
+
+            <!--sign out icon-->
+            <a href="#" class="hover:underline hover:text-signout hover:font-bold">
+                <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke-width="1.5" 
+                    stroke="currentColor" 
+                    class="size-6"
+                >
+                    <path 
+                        stroke-linecap="round" 
+                        stroke-linejoin="round" 
+                        d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15M12 9l3 3m0 0-3 3m3-3H2.25" 
+                    />
+                </svg>
+            </a>
+        </nav>
 
         <!--burger menu icon-->
         <svg 
@@ -56,8 +129,9 @@
             fill="none" 
             viewBox="0 0 24 24" 
             stroke-width="1.5" 
-            stroke="currentColor" 
-            class="size-10 absolute right-20 cursor-pointer"
+            stroke="currentColor"
+            id="menuIcon" 
+            class="size-10 cursor-pointer mr-10"
         >
             <path 
                 stroke-linecap="round" 
@@ -65,9 +139,112 @@
                 d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" 
             />
         </svg>
-
     </header>
 
-    <h1>Hei</h1>
+    <main class="flex flex-grow">
+        <!--Mobile navigation for logged out users-->
+        <nav id="loggedOutMobileNav" class="hidden">
+        <a href="#" class="underline text-hover font-bold">Listings</a>
+        <a href="#" class="hover:underline hover:text-hover hover:font-bold">Login</a>
+        <a href="#" class="hover:underline hover:text-hover hover:font-bold">Register</a>
+        </nav>
+
+        <!--Mobile navigation for logged in users-->
+        <nav id="loggedInMobileNav" class="hidden">
+            <a href="#" class="underline text-hover font-bold">Listings</a>
+
+            <!--sun icon-->
+            <a href="#" class="hover:underline hover:text-hover hover:font-bold">
+                <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke-width="1.5" 
+                    stroke="currentColor" 
+                    class="size-6"
+                >
+                    <path 
+                        stroke-linecap="round" 
+                        stroke-linejoin="round" 
+                        d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
+                    />
+                </svg>
+            </a>
+
+            <!--add icon (plus)-->
+            <a href="#" class="hover:underline hover:text-hover hover:font-bold">
+                <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke-width="1.5" 
+                    stroke="currentColor" 
+                    class="size-6"
+                >
+                    <path 
+                        stroke-linecap="round" 
+                        stroke-linejoin="round" 
+                        d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" 
+                    />
+                </svg>
+            </a>
+
+            <!--profile icon-->
+            <a href="#" class="hover:underline hover:text-hover hover:font-bold">
+                <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke-width="1.5" 
+                    stroke="currentColor" 
+                    class="size-6"
+                >
+                    <path 
+                        stroke-linecap="round" 
+                        stroke-linejoin="round" 
+                        d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" 
+                    />
+                </svg>
+            </a>
+
+            <!--sign out icon-->
+            <a href="#" class="hover:underline hover:text-signout hover:font-bold">
+                <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke-width="1.5" 
+                    stroke="currentColor" 
+                    class="size-6"
+                >
+                    <path 
+                        stroke-linecap="round" 
+                        stroke-linejoin="round" 
+                        d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15M12 9l3 3m0 0-3 3m3-3H2.25" 
+                    />
+                </svg>
+            </a>
+        </nav>
+
+        <div id="creditDisplay" class="border py-2 h-fit w-35 text-center">
+            <p>Credits: 0</p>
+        </div>
+    </main>
+
+    <footer class="flex flex-col lg:flex-row items-center border-t gap-10 py-5">
+        <div class="flex flex-col gap-2 text-start w-30">
+            <h3>Information</h3>
+            <a href="" class="underline text-hover font-bold">About us</a>
+            <a href="" class="underline text-hover font-bold">Contact us</a>
+        </div>
+
+        <div class="flex flex-col gap-2 text-start w-30">
+            <h3>Policies</h3>
+            <a href="" class="underline text-hover font-bold">Terms of use</a>
+            <a href="" class="underline text-hover font-bold">Privacy Policy</a>
+        </div>
+
+        <img src="../images/bidly-logo.png" class="h-15 w-15">
+    </footer>
 </body>
 </html>
