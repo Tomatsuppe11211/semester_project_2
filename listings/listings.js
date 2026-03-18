@@ -2,6 +2,12 @@ const menuIcon = document.getElementById('menuIcon');
 const loggedInMobileNav = document.getElementById('loggedOutMobileNav');
 const loggedOutMobileNav = document.getElementById('loggedInMobileNav');
 
+const productModal = document.getElementById('productModal');
+const closeModalButton = document.getElementById('closeModal');
+closeModalButton.addEventListener('click', function(){
+    productModal.classList = 'hidden'
+})
+
 const listingsDisplay = document.getElementById('listingsDisplay');
 
 
@@ -44,6 +50,9 @@ async function getListings(){
         }
 
         listingsDisplay.appendChild(itemDisplay);
+        itemDisplay.addEventListener('click', function(){
+            productModal.classList = 'fixed flex inset-0 items-center justify-center bg-black/50 z-50 p-4'
+        })
     }
 };
 

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/style.css">
     <script src="listings.js" defer type="module"></script>
 </head>
-< class="flex min-h-full flex-col bg-lightBG">
+<body class="flex min-h-full flex-col bg-lightBG">
     <header class="flex flex-row items-center justify-between p-2 w-screen border-b bg-white">
         <!--logo-->
         <img src="../images/bidly-logo.png" class="h-15 ml-10">
@@ -141,16 +141,48 @@
         </svg>
     </header>
 
-    <!--Product modal-->
-    <div class="fixed flex inset-0 items-center justify-center bg-black/50 z-50 p-4">
-        <div class="border-black shadow-lg shadow-black bg-white pb-5 rounded-lg max-w-md">
+    <!--Product modal change to hidden later-->
+    <div 
+        class="fixed flex inset-0 items-center justify-center bg-black/50 z-25 p-4 overflow"
+        id="productModal"
+    >
+        <div class="border-black shadow-lg shadow-black bg-white rounded-lg max-w-md relative">
+            <!--Close button-->
+            <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke-width="1.5" 
+                stroke="currentColor" 
+                id="closeModal"
+                class="size-8 hover:text-error absolute top-3 right-5"
+            >
+                <path 
+                    stroke-linecap="round" 
+                    stroke-linejoin="round" 
+                    d="M6 18 18 6M6 6l12 12" 
+                />
+            </svg>
+
             <img
                 id="productImages"
                 src='https://images.unsplash.com/vector-1773501995769-cb593aed811c?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
                 class="rounded-tr-lg rounded-tl-lg"
+            >
+            <div class="flex flex-col gap-2">
+                <h1 id="productTitle">Product title</h1>
+                <p id="productDescription">Product description</p>
+                <p id="timer">Time left: </p>
+                <p id="currentBidding">Current bidding</p>
+                <p id="modalCreditDisplay">Available credits: Login to bid on this product</p>
+                <div 
+                    id="modalActionButtons"
+                    class="flex flex-row w-full border justify-evenly"
                 >
-
-            <h1 id="itemTitle">Product title</h1>
+                    <button class="border border-black p-2 w-20 bg-button hover:bg-hover hover:text-white hover:font-bold">History</button>
+                    <button class="border border-black p-2 w-20 bg-button hover:bg-hover hover:text-white hover:font-bold">Bid</button>
+                </div>
+            </div>
         </div>
     </div>
 
