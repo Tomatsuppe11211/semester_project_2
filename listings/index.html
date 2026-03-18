@@ -8,7 +8,7 @@
     <script src="listings.js" defer type="module"></script>
 </head>
 <body class="flex min-h-full flex-col bg-lightBG">
-    <header class="flex flex-row items-center justify-between p-2 w-screen border-b bg-white">
+    <header class="fixed flex flex-row items-center justify-between p-2 border-b bg-white w-full">
         <!--logo-->
         <img src="../images/bidly-logo.png" class="h-15 ml-10">
 
@@ -142,54 +142,106 @@
     </header>
 
     <!--Product modal change to hidden later-->
-    <div 
-        class="fixed flex inset-0 items-center justify-center bg-black/50 z-25 p-4 overflow"
-        id="productModal"
-    >
-        <div class="border-black shadow-lg shadow-black bg-white rounded-lg max-w-md relative">
-            <!--Close button-->
-            <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                fill="none" 
-                viewBox="0 0 24 24" 
-                stroke-width="1.5" 
-                stroke="currentColor" 
-                id="closeModal"
-                class="size-8 hover:text-error absolute top-3 right-5"
-            >
-                <path 
-                    stroke-linecap="round" 
-                    stroke-linejoin="round" 
-                    d="M6 18 18 6M6 6l12 12" 
-                />
-            </svg>
+    <div class="hidden" id="productModal">
+        <div class="border-black shadow-lg shadow-black bg-white rounded-lg w-md lg:w-xl relative overflow-y-auto max-h-[95vh]">
+            
 
-            <img
-                id="productImages"
-                src='https://images.unsplash.com/vector-1773501995769-cb593aed811c?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-                class="rounded-tr-lg rounded-tl-lg"
-            >
-            <div class="flex flex-col gap-2">
-                <h1 id="productTitle">Product title</h1>
-                <p id="productDescription">Product description</p>
-                <p id="timer">Time left: </p>
-                <p id="currentBidding">Current bidding</p>
-                <p id="modalCreditDisplay">Available credits: Login to bid on this product</p>
-                <div 
-                    id="modalActionButtons"
-                    class="flex flex-row w-full border justify-evenly"
+            <div class="flex flex-col relative h-100 w-full">
+                <!--Close button-->
+                <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke-width="1.5" 
+                    stroke="currentColor" 
+                    id="closeModal"
+                    class="size-8 hover:text-error absolute top-3 right-5 bg-white rounded-full cursor-pointer"
                 >
-                    <button class="border border-black p-2 w-20 bg-button hover:bg-hover hover:text-white hover:font-bold">History</button>
-                    <button class="border border-black p-2 w-20 bg-button hover:bg-hover hover:text-white hover:font-bold">Bid</button>
+                    <path 
+                        stroke-linecap="round" 
+                        stroke-linejoin="round" 
+                        d="M6 18 18 6M6 6l12 12" 
+                    />
+                </svg>
+
+                <!--arrow button for switching images LEFT-->
+                <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke-width="1" 
+                    stroke="currentColor" 
+                    class="size-15 absolute left-10 bottom-10 rounded-full bg-button hover:bg-hover hover:text-white shadow-xl shadow-black"
+                >
+                    <path 
+                        stroke-linecap="round" 
+                        stroke-linejoin="round" 
+                        d="m11.25 9-3 3m0 0 3 3m-3-3h7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" 
+                    />
+                </svg>
+
+                <!--Arrow button for switching images RIGHT-->
+                <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke-width="1" 
+                    stroke="currentColor" 
+                    class="size-15 absolute right-10 bottom-10 rounded-full bg-button hover:bg-hover hover:text-white shadow-xl shadow-black"
+                >
+                    <path 
+                        stroke-linecap="round" 
+                        stroke-linejoin="round" 
+                        d="m12.75 15 3-3m0 0-3-3m3 3h-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" 
+                    />
+                </svg>
+
+
+
+                <img id="productImages" class="rounded-tr-lg rounded-tl-lg h-full w-full">
+
+            </div>
+            
+
+            <div class="flex flex-col gap-2 p-2">
+                <h1 id="productTitle" class="text-xl font-bold font-libre">Product title</h1>
+                <p id="seller" class="text-xl font-slab">Created by:</p>
+                <p id="productDescription" class="text-xl font-slab">Product description</p>
+                <p id="timer" class="text-xl font-slab">Time left: </p>
+                <p id="currentBidding" class="text-xl font-slab">Current bidding:</p>
+                <p id="modalCreditDisplay" class="text-xl font-slab">Available credits: Login to bid on this product</p>
+
+                <div class="flex flex-row justify-evenly mt-5">
+                    <button id="modalBidButton" class="border border-black p-2 w-20 bg-button hover:bg-hover hover:text-white hover:font-bold rounded-lg shadow-md shadow-black cursor-pointer">Bid</button>
+                </div>
+
+                <div class="flex flex-col mt-5" id="listingHistory">
+                    <h2 class="text-lg font-bold font-libre">Bidding History</h2>
                 </div>
             </div>
         </div>
     </div>
 
-    <main class="flex grow flex-col">
+    <main class="flex grow flex-col mt-15">
         <!--Mobile navigation for logged out users-->
         <nav id="loggedOutMobileNav" class="hidden">
-        <a href="#" class="underline text-hover font-bold">Listings</a>
+        <!--Close button-->
+        <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            fill="none" 
+            viewBox="0 0 24 24" 
+            stroke-width="1.5" 
+            stroke="currentColor" 
+            id="closeBurgerMenu"
+            class="size-8 hover:text-error absolute top-3 right-5 bg-white rounded-full cursor-pointer"
+        >
+            <path 
+                stroke-linecap="round" 
+                stroke-linejoin="round" 
+                d="M6 18 18 6M6 6l12 12" 
+            />
+        </svg>
+        <a href="#" class="underline text-hover font-bold mt-10">Listings</a>
         <a href="#" class="hover:underline hover:text-hover hover:font-bold">Login</a>
         <a href="#" class="hover:underline hover:text-hover hover:font-bold">Register</a>
         </nav>
