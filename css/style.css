@@ -1,4 +1,4 @@
-/*! tailwindcss v4.2.1 | MIT License | https://tailwindcss.com */
+/*! tailwindcss v4.2.2 | MIT License | https://tailwindcss.com */
 @layer properties;
 @layer theme, base, components, utilities;
 @layer theme {
@@ -206,9 +206,6 @@
   .hidden {
     display: none;
   }
-  .table {
-    display: table;
-  }
   .size-6 {
     width: calc(var(--spacing) * 6);
     height: calc(var(--spacing) * 6);
@@ -259,9 +256,6 @@
   .w-50 {
     width: calc(var(--spacing) * 50);
   }
-  .w-80 {
-    width: calc(var(--spacing) * 80);
-  }
   .w-fit {
     width: fit-content;
   }
@@ -274,20 +268,11 @@
   .max-w-md {
     max-width: var(--container-md);
   }
-  .flex-grow {
-    flex-grow: 1;
-  }
   .grow {
     flex-grow: 1;
   }
-  .border-collapse {
-    border-collapse: collapse;
-  }
   .cursor-pointer {
     cursor: pointer;
-  }
-  .resize {
-    resize: both;
   }
   .flex-col {
     flex-direction: column;
@@ -316,9 +301,6 @@
   .gap-10 {
     gap: calc(var(--spacing) * 10);
   }
-  .overflow-y-auto {
-    overflow-y: auto;
-  }
   .rounded-lg {
     border-radius: var(--radius-lg);
   }
@@ -346,9 +328,6 @@
   }
   .border-black {
     border-color: var(--color-black);
-  }
-  .bg-black {
-    background-color: var(--color-black);
   }
   .bg-black\/50 {
     background-color: color-mix(in srgb, #000 50%, transparent);
@@ -382,12 +361,6 @@
   }
   .py-5 {
     padding-block: calc(var(--spacing) * 5);
-  }
-  .py-10 {
-    padding-block: calc(var(--spacing) * 10);
-  }
-  .pb-4 {
-    padding-bottom: calc(var(--spacing) * 4);
   }
   .pb-5 {
     padding-bottom: calc(var(--spacing) * 5);
@@ -425,10 +398,6 @@
     @supports (color: color-mix(in lab, red, red)) {
       --tw-shadow-color: color-mix(in oklab, var(--color-black) var(--tw-shadow-alpha), transparent);
     }
-  }
-  .outline {
-    outline-style: var(--tw-outline-style);
-    outline-width: 1px;
   }
   .hover\:cursor-pointer {
     &:hover {
@@ -561,24 +530,9 @@
       height: calc(var(--spacing) * 50);
     }
   }
-  .lg\:h-60 {
-    @media (width >= 64rem) {
-      height: calc(var(--spacing) * 60);
-    }
-  }
   .lg\:h-70 {
     @media (width >= 64rem) {
       height: calc(var(--spacing) * 70);
-    }
-  }
-  .lg\:h-75 {
-    @media (width >= 64rem) {
-      height: calc(var(--spacing) * 75);
-    }
-  }
-  .lg\:h-80 {
-    @media (width >= 64rem) {
-      height: calc(var(--spacing) * 80);
     }
   }
   .lg\:h-130 {
@@ -713,11 +667,6 @@
   inherits: false;
   initial-value: 0 0 #0000;
 }
-@property --tw-outline-style {
-  syntax: "*";
-  inherits: false;
-  initial-value: solid;
-}
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
@@ -737,7 +686,6 @@
       --tw-ring-offset-width: 0px;
       --tw-ring-offset-color: #fff;
       --tw-ring-offset-shadow: 0 0 #0000;
-      --tw-outline-style: solid;
     }
   }
 }
