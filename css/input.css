@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+/*Adding a dark mode*/
+@custom-variant dark (&:where(.dark, .dark *));
 
 /*importing fonts*/
 @import url('https://fonts.googleapis.com/css2?family=Arbutus+Slab&family=Miriam+Libre:wght@400..700&display=swap');
