@@ -6,6 +6,7 @@
     <title>Bidly.com/Login</title>
     <link rel="stylesheet" href="../css/style.css">
     <script src="../src/navigationbar.js" defer></script>
+    <script src="login.js" defer></script>
 </head>
 <body class="flex min-h-full flex-col bg-lightBG">
     <header class="flex flex-row items-center justify-between w-full p-2 md:p-3 border-b bg-white dark:bg-dark-header dark:text-white dark:border-b-black">
@@ -108,7 +109,7 @@
         </svg>
     </header>
 
-    <main class="flex grow flex-col min-h-screen dark:bg-darkBG">
+    <main class="flex grow flex-col min-h-screen dark:bg-darkBG items-center justify-center">
         <!--Mobile navigation-->
         <nav 
             id="mobileNav" 
@@ -203,6 +204,73 @@
                 </svg>
             </div>
         </nav>
+
+        <!--Login form-->
+        <form id="loginForm" class="flex flex-col items-center justify-center border w-[90%] sm:w-md md:w-lg lg:w-xl px-2 md:px-4 py-5 rounded-md gap-5 md:gap-10 shadow-md md:shadow-lg shadow-black bg-white dark:bg-dark-header text-white">
+            <h1 class="text-2xl md:text-4xl text-center font-slab">Login</h1>
+
+            <div class="flex flex-col w-[90%] gap-2">
+                <label for="emailInput" class="text-lg md:text-xl font-slab">Email</label>
+                <div class="flex flex-row py-2 px-4 border items-center justify-between w-full rounded-full dark:bg-darkBG">
+                    <input 
+                        type="email" 
+                        id="emailInput" 
+                        placeholder="example@stud.noroff.no" 
+                        class="px-2 w-4/5 focus:outline-none md:text-lg font-libre"
+                        pattern=".+@stud.noroff.no"
+                        required
+                    >
+
+                    <!--envelope icon-->
+                    <svg 
+                        xmlns="http://www.w3.org/2000/svg" 
+                        fill="none" 
+                        viewBox="0 0 24 24" 
+                        stroke-width="1.5" 
+                        stroke="currentColor" 
+                        class="size-6 md:size-8"
+                    >
+                        <path 
+                            stroke-linecap="round" 
+                            stroke-linejoin="round" 
+                            d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" 
+                        />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="flex flex-col w-[90%] gap-2">
+                <label for="passwordInput" class="text-lg md:text-xl font-slab">Password</label>
+                <div class="flex flex-row py-2 px-4 border items-center justify-between w-full rounded-full dark:bg-darkBG">
+                    <input 
+                        type="password" 
+                        id="passwordInput" 
+                        placeholder="Password" 
+                        class="px-2 w-4/5 focus:outline-none md:text-lg font-libre"
+                        required
+                    >
+
+                    <!--lock icon-->
+                    <svg 
+                        xmlns="http://www.w3.org/2000/svg" 
+                        fill="none" 
+                        viewBox="0 0 24 24" 
+                        stroke-width="1.5" 
+                        stroke="currentColor" 
+                        class="size-6 md:size-8"
+                    >
+                        <path 
+                            stroke-linecap="round" 
+                            stroke-linejoin="round" 
+                            d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" 
+                        />
+                    </svg>
+
+                </div>
+            </div>
+
+            <button id="loginButton" class="py-2 px-4 border rounded-lg bg-button shadow-md shadow-black hover:bg-hover hover:text-white hover:border-black text-lg font-bold font-libre cursor-pointer dark:text-black dark:border-black">Login</button>
+        </form>
     </main>
 
     <footer class="flex flex-col lg:flex-row items-center border-t gap-10 py-5 lg:justify-evenly bg-white w-full dark:bg-dark-header dark:text-white dark:border-t-black">
