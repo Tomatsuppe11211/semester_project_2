@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bidly.com/Privacy Policy</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <script src="../../src/navigationbar.js" defer></script>
+</head>
+<body class="flex min-h-screen flex-col bg-lightBG dark:bg-darkBG gap-10">
+    <header class="flex flex-row items-center justify-between w-full p-2 md:p-3 border-b bg-white dark:bg-dark-header dark:text-white dark:border-b-black">
+        <!--logo-->
+        <img src="../../images/bidly-logo.png" class="h-15 ml-10 md:h-20 cursor-pointer" id="headerLogo">
+
+        <!--desktop navigation-->
+        <nav class="hidden md:flex flex-row justify-evenly w-2xl">
+            <a href="../../listings/index.html" class="hover:underline hover:text-hover hover:font-bold text-lg md:text-xl">Listings</a>
+
+            <!--Links for logged out users-->
+            <a href="../../login/index.html" id="desktopLoginLink" class="hover:underline hover:text-hover hover:font-bold text-lg md:text-xl">Login</a>
+            <a href="../../register/index.html" id="desktopRegisterLink" class="hover:underline hover:text-hover hover:font-bold text-lg md:text-xl">Register</a>
+            
+            <!--Sun icon-->
+            <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke-width="1.5" 
+                stroke="currentColor" 
+                id="desktopSun"
+                class="size-8 hover:text-hover cursor-pointer"
+            >
+                <path 
+                    stroke-linecap="round" 
+                    stroke-linejoin="round" 
+                    d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
+                />
+            </svg>
+
+            <!--For logged in users-->
+            <!--add icon (plus)-->
+            <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke-width="1.5" 
+                stroke="currentColor" 
+                id="desktopPlus"
+                class="hidden size-8 hover:text-hover hover:font-bold cursor-pointer"
+            >
+                <path 
+                    stroke-linecap="round" 
+                    stroke-linejoin="round" 
+                    d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" 
+                />
+            </svg>
+
+            <!--profile icon-->
+            <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke-width="1.5" 
+                stroke="currentColor" 
+                id="desktopProfile"
+                class="hidden size-8 hover:text-hover hover:font-bold cursor-pointer"
+            >
+                <path 
+                    stroke-linecap="round" 
+                    stroke-linejoin="round" 
+                    d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" 
+                />
+            </svg>
+
+            <!--sign out icon-->
+            <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke-width="1.5" 
+                stroke="currentColor"
+                id="desktopDoor" 
+                class="hidden size-8 hover:text-signout hover:font-bold"
+            >
+                <path 
+                    stroke-linecap="round" 
+                    stroke-linejoin="round" 
+                    d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15M12 9l3 3m0 0-3 3m3-3H2.25" 
+                />
+            </svg>
+        </nav>
+
+        <!--burger menu icon-->
+        <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            fill="none" 
+            viewBox="0 0 24 24" 
+            stroke-width="1.5" 
+            stroke="currentColor"
+            id="menuIcon" 
+            class="size-10 cursor-pointer mr-10 md:hidden"
+        >
+            <path 
+                stroke-linecap="round" 
+                stroke-linejoin="round" 
+                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" 
+            />
+        </svg>
+    </header>
+
+    <main class="flex grow flex-col items-center justify-center dark:text-white">
+        <!--Mobile navigation-->
+        <nav 
+            id="mobileNav" 
+            class="hidden md:hidden"
+        >
+
+            <!--Close button-->
+            <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke-width="1.5" 
+                stroke="currentColor" 
+                id="closeBurgerMenu"
+                class="size-8 hover:text-error absolute top-3 right-5 rounded-full cursor-pointer"
+            >
+                <path 
+                    stroke-linecap="round" 
+                    stroke-linejoin="round" 
+                    d="M6 18 18 6M6 6l12 12" 
+                />
+            </svg>
+
+            <!--Links-->
+            <div id="mobileNavLinks" class="flex flex-col w-25 mt-20 gap-5">
+                <a href="../../listings/index.html" class="text-lg">Listings</a>
+                <a href="../../login/index.html" id="mobileLoginLink" class="text-lg">Login</a>
+                <a href="../../register/index.html" id="mobileRegisterLink" class="text-lg">Register</a>
+                <!--Sun icon-->
+                <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke-width="1.5" 
+                    stroke="currentColor" 
+                    id="mobileSun"
+                    class="size-8 hover:text-hover cursor-pointer"
+                >
+                    <path 
+                        stroke-linecap="round" 
+                        stroke-linejoin="round" 
+                        d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
+                    />
+                </svg>
+                <!--add icon (plus)-->
+                <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke-width="1.5" 
+                    stroke="currentColor" 
+                    id="mobilePlus"
+                    class="hidden size-8 hover:text-hover cursor-pointer"
+                >
+                    <path 
+                        stroke-linecap="round" 
+                        stroke-linejoin="round" 
+                        d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" 
+                    />
+                </svg>
+                <!--profile icon-->
+                <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke-width="1.5" 
+                    stroke="currentColor" 
+                    id="mobileProfile"
+                    class=" hidden size-8 hover:text-hover cursor-pointer"
+                >
+                    <path 
+                        stroke-linecap="round" 
+                        stroke-linejoin="round" 
+                        d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" 
+                    />
+                </svg>
+                <!--sign out icon-->
+                <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke-width="1.5" 
+                    stroke="currentColor" 
+                    id="mobileDoor"
+                    class="hidden size-8 hover:text-signout cursor-pointer"
+                >
+                    <path 
+                        stroke-linecap="round" 
+                        stroke-linejoin="round" 
+                        d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15M12 9l3 3m0 0-3 3m3-3H2.25" 
+                    />
+                </svg>
+            </div>
+        </nav>
+
+        <!--Content-->
+        <div class="flex flex-col border p-4 w-3/4 justify-center gap-10">
+            <h1 class="text-2xl font-bold font-slab text-center">Privacy Policy</h1>
+
+            <p class="font-libre">Last updated 06.03.2026</p>
+
+            <div class="flex flex-col gap-5">
+                <h2 class="font-slab font-bold underline text-2xl">Information we collect</h2>
+
+                <p class="text-lg">We collect information you provide directly. Information you provide is:</p>
+                <p class="text-lg"><strong>Account details:</strong> name, email, username and password when you register</p>
+                <p class="text-lg"><strong>Profile information:</strong> Biography</p>
+                <p class="text-lg"> <strong>Auction activities:</strong> biddings placed and items listed</p>
+            </div>
+
+            <div class="flex flex-col gap-5">
+                <h2 class="font-slab font-bold underline text-2xl">How we use your information</h2>
+
+                <p class="text-lg">
+                    We use the information we collect to provide, maintain and improve Bidly, and to make 
+                    our platform safe and trustworthy. We use it to:
+                </p>
+
+                <ul class="list-disc ml-5">
+                    <li>Create and manage your account and authenticate your identity</li>
+                    <li>Process bids and complete transactions</li>
+                </ul>
+            </div>
+            
+        </div>
+        
+        
+    </main>
+
+    <footer class="flex flex-col lg:flex-row items-center border-t gap-10 py-5 lg:justify-evenly bg-white w-full dark:bg-dark-header dark:text-white dark:border-t-black">
+        <div class="flex flex-col gap-2 text-center lg:text-start w-30">
+            <h3 class="font-bold underline text-lg md:text-xl">Information</h3>
+            <a href="../../about/index.html" class="hover:underline hover:text-hover hover:font-bold md:text-lg">About us</a>
+            <a href="" class="hover:underline hover:text-hover hover:font-bold md:text-lg">Contact us</a>
+        </div>
+
+        <div class="flex flex-col gap-2 text-center lg:text-start w-30">
+            <h3 class="font-bold underline text-lg md:text-xl">Policies</h3>
+            <a href="" class="hover:underline hover:text-hover hover:font-bold md:text-lg">Terms of use</a>
+            <a href="#" class="hover:underline hover:text-hover hover:font-bold md:text-lg">Privacy Policy</a>
+        </div>
+
+        <img src="../../images/bidly-logo.png" class="h-15 lg:h-20 cursor-pointer" id="footerLogo">
+    </footer>
+</body>
+</html>

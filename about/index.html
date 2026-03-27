@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/style.css">
     <script src="../src/navigationbar.js" defer></script>
 </head>
-<body class="flex min-h-full flex-col bg-lightBG">
+<body class="flex min-h-screen flex-col bg-lightBG dark:bg-darkBG gap-10">
     <header class="flex flex-row items-center justify-between w-full p-2 md:p-3 border-b bg-white dark:bg-dark-header dark:text-white dark:border-b-black">
         <!--logo-->
         <img src="../images/bidly-logo.png" class="h-15 ml-10 md:h-20 cursor-pointer" id="headerLogo">
@@ -18,7 +18,7 @@
 
             <!--Links for logged out users-->
             <a href="../login/index.html" id="desktopLoginLink" class="hover:underline hover:text-hover hover:font-bold text-lg md:text-xl">Login</a>
-            <a href="#" id="desktopRegisterLink" class="hover:underline hover:text-hover hover:font-bold text-lg md:text-xl">Register</a>
+            <a href="../register/index.html" id="desktopRegisterLink" class="hover:underline hover:text-hover hover:font-bold text-lg md:text-xl">Register</a>
             
             <!--Sun icon-->
             <svg 
@@ -108,7 +108,7 @@
         </svg>
     </header>
 
-    <main class="flex grow flex-col min-h-screen dark:bg-darkBG dark:text-white">
+    <main class="flex grow flex-col items-center justify-center dark:text-white">
         <!--Mobile navigation-->
         <nav 
             id="mobileNav" 
@@ -136,7 +136,7 @@
             <div id="mobileNavLinks" class="flex flex-col w-25 mt-20 gap-5">
                 <a href="../listings/index.html" class="text-lg">Listings</a>
                 <a href="../login/index.html" id="mobileLoginLink" class="text-lg">Login</a>
-                <a href="#" id="mobileRegisterLink" class="text-lg">Register</a>
+                <a href="../register/index.html" id="mobileRegisterLink" class="text-lg">Register</a>
                 <!--Sun icon-->
                 <svg 
                     xmlns="http://www.w3.org/2000/svg" 
@@ -235,7 +235,7 @@
         <div class="flex flex-col gap-2 text-center lg:text-start w-30">
             <h3 class="font-bold underline text-lg md:text-xl">Policies</h3>
             <a href="" class="hover:underline hover:text-hover hover:font-bold md:text-lg">Terms of use</a>
-            <a href="" class="hover:underline hover:text-hover hover:font-bold md:text-lg">Privacy Policy</a>
+            <a href="../Policies/Privacy Policy/index.html" class="hover:underline hover:text-hover hover:font-bold md:text-lg">Privacy Policy</a>
         </div>
 
         <img src="../images/bidly-logo.png" class="h-15 lg:h-20 cursor-pointer" id="footerLogo">
