@@ -8,7 +8,7 @@
     <script src="../src/navigationbar.js" defer></script>
     <script src="login.js" defer></script>
 </head>
-<body class="flex min-h-full flex-col bg-lightBG">
+<body class="flex min-h-screen flex-col bg-lightBG dark:bg-darkBG gap-20">
     <header class="flex flex-row items-center justify-between w-full p-2 md:p-3 border-b bg-white dark:bg-dark-header dark:text-white dark:border-b-black">
         <!--logo-->
         <img src="../images/bidly-logo.png" class="h-15 ml-10 md:h-20 cursor-pointer" id="headerLogo">
@@ -19,7 +19,7 @@
 
             <!--Links for logged out users-->
             <a href="#" id="desktopLoginLink" class="hover:underline hover:text-hover hover:font-bold text-lg md:text-xl">Login</a>
-            <a href="#" id="desktopRegisterLink" class="hover:underline hover:text-hover hover:font-bold text-lg md:text-xl">Register</a>
+            <a href="../register/index.html" id="desktopRegisterLink" class="hover:underline hover:text-hover hover:font-bold text-lg md:text-xl">Register</a>
             
             <!--Sun icon-->
             <svg 
@@ -109,7 +109,7 @@
         </svg>
     </header>
 
-    <main class="flex grow flex-col min-h-screen dark:bg-darkBG items-center justify-center">
+    <main class="flex grow flex-col items-center justify-center">
         <!--Mobile navigation-->
         <nav 
             id="mobileNav" 
@@ -136,8 +136,8 @@
             <!--Links-->
             <div id="mobileNavLinks" class="flex flex-col w-25 mt-20 gap-5">
                 <a href="../listings/index.html" class="text-lg">Listings</a>
-                <a href="../login/index.html" id="mobileLoginLink" class="text-lg">Login</a>
-                <a href="#" id="mobileRegisterLink" class="text-lg">Register</a>
+                <a href="#" id="mobileLoginLink" class="text-lg">Login</a>
+                <a href="../register/index.html" id="mobileRegisterLink" class="text-lg">Register</a>
                 <!--Sun icon-->
                 <svg 
                     xmlns="http://www.w3.org/2000/svg" 
@@ -206,7 +206,7 @@
         </nav>
 
         <!--Login form-->
-        <form id="loginForm" class="flex flex-col items-center justify-center border w-[90%] sm:w-md md:w-lg lg:w-xl px-2 md:px-4 py-5 rounded-md gap-5 md:gap-10 shadow-md md:shadow-lg shadow-black bg-white dark:bg-dark-header text-white">
+        <form id="loginForm" class="flex flex-col items-center justify-center border w-[90%] sm:w-md md:w-lg lg:w-xl px-2 md:px-4 py-5 rounded-md gap-5 md:gap-10 shadow-md md:shadow-lg shadow-black bg-white dark:bg-dark-header dark:text-white">
             <h1 class="text-2xl md:text-4xl text-center font-slab">Login</h1>
 
             <div class="flex flex-col w-[90%] gap-2">
@@ -265,7 +265,6 @@
                             d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" 
                         />
                     </svg>
-
                 </div>
             </div>
 
