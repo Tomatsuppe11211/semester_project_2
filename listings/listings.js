@@ -128,26 +128,3 @@ async function getListings(){
 };
 
 getListings();
-
-
-
-/*Creating functions for opening and closing navigationbars for mobile*/
-function closeLoggedInNav(){
-    loggedInMobileNav.classList = 'hidden';
-};
-
-function openLoggedInNav(){
-    loggedInMobileNav.classList = 'flex';
-};
-
-function openLoggedOutNav(){
-    loggedOutMobileNav.classList = 'flex flex-col absolute bg-white z-50 items-center w-50 gap-10 top-0 py-10 right-0 border-l h-screen';
-};
-
-function closeLoggedOutNav(){
-    loggedOutMobileNav.classList = 'hidden';
-};
-
-
-menuIcon.addEventListener('click', openLoggedOutNav);
-closeMenu.addEventListener('click', closeLoggedOutNav);

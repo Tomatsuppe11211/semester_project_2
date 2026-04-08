@@ -318,6 +318,9 @@
   .h-100 {
     height: calc(var(--spacing) * 100);
   }
+  .h-auto {
+    height: auto;
+  }
   .h-fit {
     height: fit-content;
   }
@@ -496,8 +499,15 @@
     border-left-style: var(--tw-border-style);
     border-left-width: 1px;
   }
+  .border-l-100 {
+    border-left-style: var(--tw-border-style);
+    border-left-width: 100px;
+  }
   .border-black {
     border-color: var(--color-black);
+  }
+  .border-l-black {
+    border-left-color: var(--color-black);
   }
   .bg-black {
     background-color: var(--color-black);
@@ -507,6 +517,9 @@
     @supports (color: color-mix(in lab, red, red)) {
       background-color: color-mix(in oklab, var(--color-black) 50%, transparent);
     }
+  }
+  .bg-blue-500 {
+    background-color: var(--color-blue-500);
   }
   .bg-button {
     background-color: var(--color-button);
@@ -552,6 +565,9 @@
   }
   .py-10 {
     padding-block: calc(var(--spacing) * 10);
+  }
+  .pl-2 {
+    padding-left: calc(var(--spacing) * 2);
   }
   .text-center {
     text-align: center;
@@ -625,6 +641,14 @@
       }
     }
   }
+  .hover\:rounded-r-full {
+    &:hover {
+      @media (hover: hover) {
+        border-top-right-radius: calc(infinity * 1px);
+        border-bottom-right-radius: calc(infinity * 1px);
+      }
+    }
+  }
   .hover\:rounded-tr-lg {
     &:hover {
       @media (hover: hover) {
@@ -639,10 +663,25 @@
       }
     }
   }
+  .hover\:border-l {
+    &:hover {
+      @media (hover: hover) {
+        border-left-style: var(--tw-border-style);
+        border-left-width: 1px;
+      }
+    }
+  }
   .hover\:border-black {
     &:hover {
       @media (hover: hover) {
         border-color: var(--color-black);
+      }
+    }
+  }
+  .hover\:border-l-black {
+    &:hover {
+      @media (hover: hover) {
+        border-left-color: var(--color-black);
       }
     }
   }
