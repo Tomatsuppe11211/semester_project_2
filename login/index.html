@@ -218,6 +218,7 @@
                         placeholder="example@stud.noroff.no" 
                         class="px-2 w-4/5 focus:outline-none md:text-lg font-libre"
                         pattern=".+@stud.noroff.no"
+                        method="post"
                         required
                     >
 
@@ -241,12 +242,14 @@
 
             <div class="flex flex-col w-[90%] gap-2">
                 <label for="passwordInput" class="text-lg md:text-xl font-slab">Password</label>
-                <div class="flex flex-row py-2 px-4 border items-center justify-between w-full rounded-full dark:bg-darkBG dark:border-black">
+                <div class="flex flex-row py-2 px-4 border items-center justify-between w-full rounded-full dark:bg-darkBG dark:border-black invalid:border-red-500">
                     <input 
                         type="password" 
                         id="passwordInput" 
                         placeholder="Password" 
                         class="px-2 w-4/5 focus:outline-none md:text-lg font-libre"
+                        pattern=".{8,}"
+                        method="post"
                         required
                     >
 
