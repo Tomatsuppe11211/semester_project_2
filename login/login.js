@@ -22,20 +22,56 @@ passwordInput.addEventListener('invalid', function(e){
     }
 });
 
-loginForm.addEventListener('submit', async function(){
+//Login function
+loginForm.addEventListener('submit', async function(e){
+    e.preventDefault();
+
+    let userRequest = {
+        email: emailInput.value,
+        password: passwordInput.value
+    }
+
     try{
-        const response = fetch('https://v2.api.noroff.dev/auth/login', {
-            method: 'post',
+        const response = await fetch('https://v2.api.noroff.dev/auth/login', {
+            method: 'POST',
             headers: {
-                'content-type': 'json/application'
+                'Content-Type': 'application/json'
             },
-            body:JSON.stringify({
-                    email: emailInput.value,
-                    password: passwordInput.value
+            body: JSON.stringify({
+                    email: userRequest.email,
+                    password: userRequest.password
                 })
         });
 
-    } catch(error) {
+        const data = await response.json();
 
+        if(!response.ok){
+            console.log(data.errors?.[0].message || data.message || 'Login failed');
+            return;
+        };
+
+        console.log(data);
+
+        const token = data.data.accessToken
+
+        //Creating an API-Key
+        async function createApiKey(){
+            const response = await fetch('https://v2.api.noroff.dev/auth/create-api-key', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({name: 'Current ApiKey'})
+            });
+
+            const data = await response.json();
+            console.log(data.data.key);
+        }
+
+        createApiKey();
+
+    } catch(error) {
+        console.error('Error: User unauthorized');
     }
 });
