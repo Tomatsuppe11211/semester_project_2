@@ -2,6 +2,7 @@ const loginForm = document.getElementById('loginForm')
 const emailInput = document.getElementById('emailInput');
 const passwordInput = document.getElementById('passwordInput');
 const loginButton = document.getElementById('loginButton');
+const messageDisplay = document.getElementById('message');
 
 
 //Chreating custom messages for the html validation
@@ -46,9 +47,13 @@ loginForm.addEventListener('submit', async function(e){
         const data = await response.json();
 
         if(!response.ok){
-            console.log(data.errors?.[0].message || data.message || 'Login failed');
+            messageDisplay.innerHTML = data.errors?.[0].message || data.message || 'Login failed';
+            messageDisplay.classList = 'p-2 border w-full text-lg bg-error dark:text-black dark:border-black'
             return;
         };
+
+        messageDisplay.innerHTML = `welcome ${data.data.name}! loggin in and redirecting...`
+        messageDisplay.classList = 'p-2 border w-full text-lg bg-success dark:text-black dark:border-black'
 
         console.log(data);
         sessionStorage.setItem('user', JSON.stringify(data.data));
@@ -76,7 +81,8 @@ loginForm.addEventListener('submit', async function(e){
 
         createApiKey();
 
-        window.location.href = '../listings/index.html';
+        //redirecting after 3 seconds
+        setTimeout(() => {window.location.href = '../listings/index.html';}, 3000);
     } catch(error) {
         console.error('Error: User unauthorized');
     }

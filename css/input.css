@@ -14,7 +14,9 @@
     --color-hover: #00AAFF;
     --color-signout: #FB5353;
     --color-lightBG: #EFEFEF;
-    --color-error: #FF0000;
+    --color-error: #FF9496;
+    --color-success: #8EFF72;
+    --color-red: #FF0000;
     --color-dark-header: #454545;
     --color-darkBG: #3B3B3B;
 }

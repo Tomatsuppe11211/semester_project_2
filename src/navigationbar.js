@@ -3,13 +3,13 @@ const headerLogo = document.getElementById('headerLogo');
 const footerLogo = document.getElementById('footerLogo');
 
 function logoSend(){
-    window.location.href = '../index.html';
+    window.location.href = '../listings/index.html';
 };
 
 if(headerLogo && footerLogo){
     headerLogo.addEventListener('click', logoSend);
     footerLogo.addEventListener('click', logoSend);
-}
+};
 
 
 //--------------------------------------------------------------------------
@@ -38,7 +38,7 @@ function openMobileNav(){
 if(closeNavbarButton && menuToggler){
     closeNavbarButton.addEventListener('click', closemobileNav);
     menuToggler.addEventListener('click', openMobileNav);
-}
+};
 
 
 
@@ -126,7 +126,8 @@ const mobileProfileLink = document.getElementById('mobileProfile');
 const mobileSignOut = document.getElementById('mobileDoor');
 
 //Setting style for shown navigationbar icons when logged in
-const iconStyle = 'size-8 hover:text-hover hover:font-bold cursor-pointer'
+const iconStyle = 'size-8 hover:text-hover hover:font-bold cursor-pointer';
+const signOutStyle = 'size-8 hover:text-red hover:font-bold cursor-pointer';
 
 //CHecking if there is any logged in users
 const currentUser = JSON.parse(sessionStorage.getItem('user'));
@@ -137,12 +138,15 @@ if(currentUser && currentUser !== null){
 
     //Making login and register links invisible
     deskLoginLink.classList = deskRegisterLink.classList = 
-    mobileLoginLink.classList = mobileRegisterLink.classList = 'hidden'
+    mobileLoginLink.classList = mobileRegisterLink.classList = 'hidden';
 
     //Making icons visible
-    deskAddLink.classList = deskProfileLink.classList = desktopSignOut.classList =
-    mobileAddLink.classList = mobileProfileLink.classList = mobileSignOut.classList = iconStyle
+    deskAddLink.classList = deskProfileLink.classList  =
+    mobileAddLink.classList = mobileProfileLink.classList = iconStyle;
+    
+    mobileSignOut.classList = desktopSignOut.classList = signOutStyle;
 }
+
 
 
 //Adding a signout function
@@ -155,5 +159,52 @@ function signOut(){
     }
 }
 
-desktopSignOut.addEventListener('click', signOut);
-mobileSignOut.addEventListener('click', signOut);
+//creating a signout modal the user can open/close
+function openSignOutModal(){
+    //Adding a message modal
+    const body = document.body;
+
+    const modal = document.createElement('div');
+    modal.classList = 'flex fixed inset-0 items-center justify-center bg-black/50 z-50 overflow-y-auto p-4';
+
+    modalDisplay = document.createElement('div');
+    modalDisplay.classList = 'flex flex-col text-center bg-white dark:bg-darkBG dark:text-white p-2 md:p-4 w-2/3 md:w-1/4 gap-5 shadow-lg shadow-black';
+    modal.appendChild(modalDisplay);
+
+    const modalTitle = document.createElement('h1');
+    modalTitle.innerHTML = 'Sign out?';
+    modalTitle.classList = 'text-2xl md:text-4xl';
+    modalDisplay.appendChild(modalTitle);
+
+    const modalMessage = document.createElement('p');
+    modalMessage.innerHTML = 'You are about to sign out. Continue?';
+    modalMessage.classList = 'text-lg md:text-xl';
+    modalDisplay.appendChild(modalMessage);
+
+    const choiceDiv = document.createElement('div');
+    choiceDiv.classList = 'flex flex-row w-full justify-evenly ';
+    modalDisplay.appendChild(choiceDiv);
+
+    const signOutButton = document.createElement('button');
+    signOutButton.innerHTML = 'Sign out';
+    signOutButton.classList = 'border p-2 md:w-1/5 bg-error text-black hover:bg-red hover:text-white hover:border-black cursor-pointer md:text-lg dark:border-black';
+    signOutButton.addEventListener('click', signOut);
+    choiceDiv.appendChild(signOutButton);
+
+    const cancelButton = document.createElement('button');
+    cancelButton.innerHTML = 'Cancel';
+    cancelButton.classList = 'border p-2 md:w-1/5 hover:bg-hover cursor-pointer md:text-lg dark:border-black dark:bg-dark-header';
+    cancelButton.addEventListener('click', closeSignOutModal);
+    choiceDiv.appendChild(cancelButton);
+
+    body.appendChild(modal);
+
+
+    function closeSignOutModal(){
+        modal.classList = modalDisplay.classlist = modalTitle.classlist =
+        modalMessage.classlist = choiceDiv.classlist = 'hidden';
+    }
+}
+
+desktopSignOut.addEventListener('click', openSignOutModal);
+mobileSignOut.addEventListener('click', openSignOutModal);
