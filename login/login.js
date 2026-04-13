@@ -27,11 +27,6 @@ passwordInput.addEventListener('invalid', function(e){
 loginForm.addEventListener('submit', async function(e){
     e.preventDefault();
 
-    let userRequest = {
-        email: emailInput.value,
-        password: passwordInput.value
-    }
-
     try{
         const response = await fetch('https://v2.api.noroff.dev/auth/login', {
             method: 'POST',
@@ -39,8 +34,8 @@ loginForm.addEventListener('submit', async function(e){
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                    email: userRequest.email,
-                    password: userRequest.password
+                    email: emailInput.value,
+                    password: passwordInput.value
                 })
         });
 
@@ -55,7 +50,6 @@ loginForm.addEventListener('submit', async function(e){
         messageDisplay.innerHTML = `welcome ${data.data.name}! loggin in and redirecting...`
         messageDisplay.classList = 'p-2 border w-full text-lg bg-success dark:text-black dark:border-black'
 
-        console.log(data);
         sessionStorage.setItem('user', JSON.stringify(data.data));
 
         const token = data.data.accessToken
@@ -76,7 +70,6 @@ loginForm.addEventListener('submit', async function(e){
 
             
             sessionStorage.setItem('key', createdKey);
-            console.log(sessionStorage.getItem('key'));
         }
 
         createApiKey();
