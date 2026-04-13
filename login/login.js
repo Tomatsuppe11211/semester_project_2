@@ -51,6 +51,7 @@ loginForm.addEventListener('submit', async function(e){
         };
 
         console.log(data);
+        sessionStorage.setItem('user', JSON.stringify(data.data));
 
         const token = data.data.accessToken
 
@@ -66,11 +67,16 @@ loginForm.addEventListener('submit', async function(e){
             });
 
             const data = await response.json();
-            console.log(data.data.key);
+            const createdKey = data.data.key;
+
+            
+            sessionStorage.setItem('key', createdKey);
+            console.log(sessionStorage.getItem('key'));
         }
 
         createApiKey();
 
+        window.location.href = '../listings/index.html';
     } catch(error) {
         console.error('Error: User unauthorized');
     }

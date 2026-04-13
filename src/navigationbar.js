@@ -102,3 +102,58 @@ if(
         mobileSun.innerHTML = sun;
     };
 };
+
+
+
+//--------------------------------------------------------------------------
+
+
+
+//Changing the navigationbar if logged in
+
+//Getting login and register links
+const deskLoginLink = document.getElementById('desktopLoginLink'); 
+const deskRegisterLink = document.getElementById('desktopRegisterLink');
+const mobileLoginLink = document.getElementById('mobileLoginLink');
+const mobileRegisterLink = document.getElementById('mobileRegisterLink');
+
+//Getting hidden links
+const deskAddLink = document.getElementById('desktopPlus');
+const deskProfileLink = document.getElementById('desktopProfile');
+const desktopSignOut = document.getElementById('desktopDoor');
+const mobileAddLink = document.getElementById('mobilePlus');
+const mobileProfileLink = document.getElementById('mobileProfile');
+const mobileSignOut = document.getElementById('mobileDoor');
+
+//Setting style for shown navigationbar icons when logged in
+const iconStyle = 'size-8 hover:text-hover hover:font-bold cursor-pointer'
+
+//CHecking if there is any logged in users
+const currentUser = JSON.parse(sessionStorage.getItem('user'));
+if(currentUser && currentUser !== null){
+    const key = sessionStorage.getItem('key');
+    console.log(currentUser);
+    console.log(key);
+
+    //Making login and register links invisible
+    deskLoginLink.classList = deskRegisterLink.classList = 
+    mobileLoginLink.classList = mobileRegisterLink.classList = 'hidden'
+
+    //Making icons visible
+    deskAddLink.classList = deskProfileLink.classList = desktopSignOut.classList =
+    mobileAddLink.classList = mobileProfileLink.classList = mobileSignOut.classList = iconStyle
+}
+
+
+//Adding a signout function
+function signOut(){
+    if(currentUser){
+        sessionStorage.removeItem('user');
+        sessionStorage.removeItem('key');
+
+        window.location.href = '../index.html';
+    }
+}
+
+desktopSignOut.addEventListener('click', signOut);
+mobileSignOut.addEventListener('click', signOut);
