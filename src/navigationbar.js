@@ -208,3 +208,11 @@ function openSignOutModal(){
 
 desktopSignOut.addEventListener('click', openSignOutModal);
 mobileSignOut.addEventListener('click', openSignOutModal);
+
+//Sending user to create listing page when clicking plus icon
+function sendToAddListing(){
+    window.location.href = '../create/index.html';
+};
+
+deskAddLink.addEventListener('click', sendToAddListing);
+mobileAddLink.addEventListener('click', sendToAddListing);
