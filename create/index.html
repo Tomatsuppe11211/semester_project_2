@@ -206,12 +206,13 @@
         </nav>
 
         <!--Create listing form-->
-        <form id="createForm" class="flex flex-col px-4 py-10 items-center w-[90%] sm:w-md md:w-lg border border-black bg-white dark:bg-darkBG gap-5 shadow-lg shadow-black">
+        <form id="createForm" class="flex flex-col px-4 py-10 items-center w-[90%] sm:w-md md:w-lg lg:w-2xl border border-black bg-white dark:bg-darkBG gap-5 shadow-lg shadow-black">
             <h1 class="text-center text-2xl md:text-3xl">Create a listing</h1>
 
             <div class="flex flex-col gap-2 w-full">
                 <label for="title" class="text-xl">Create a title</label>
                 <input 
+                    id="title"
                     type="text" 
                     placeholder="Create a title" 
                     maxlength="30"
@@ -238,23 +239,17 @@
                         type="text" 
                         placeholder="Add image url"
                         class="p-2 border border-black rounded-full bg-white text-lg dark:bg-dark-header dark:text-white w-full shadow-inner shadow-black"
+                        id="mediaUrl"
+                        pattern="https?://.+"
                         required
-                    >
-
-                    <input 
-                        type="text" 
-                        placeholder="Add image url"
-                        class="p-2 border border-black rounded-full bg-white text-lg dark:bg-dark-header dark:text-white w-full shadow-inner shadow-black"
-                    >
-
-                    <input 
-                        type="text" 
-                        placeholder="Add image url"
-                        class="p-2 border border-black rounded-full bg-white text-lg dark:bg-dark-header dark:text-white w-full shadow-inner shadow-black"
                     >
                 </div>
 
-                <button class="p-2 border border-black bg-button hover:bg-hover text-black cursor-pointer shadow-md shadow-black">Add more</button>
+                <button 
+                    id="add" 
+                    class="p-2 border border-black bg-button hover:bg-hover text-black cursor-pointer shadow-md shadow-black"
+                    type="button"
+                >Add more</button>
             </div>
 
             <div class="flex flex-col gap-2 w-full">
@@ -262,11 +257,15 @@
                 <!--Link to type example: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/datetime-local-->
                 <!--Link to check the styling of calendar picker indicator for input field: https://stackoverflow.com/questions/62162645/change-color-of-calendar-icon-in-html-date-input-->
                 <input 
-                    type="datetime-local" 
+                    id="expireDate"
+                    type="datetime-local"
                     class="dark:[&::-webkit-calendar-picker-indicator]:invert w-2/5 border border-black p-2 md:p-3 rounded-md shadow-inner shadow-black">
             </div>
 
-            <button class="p-2 bg-button hover:bg-hover border border-black shadow-md shadow-black w-1/2 text-black cursor-pointer">Create listing</button>
+            <button 
+                class="p-2 bg-button hover:bg-hover border border-black shadow-md shadow-black w-1/2 text-black cursor-pointer"
+                type="submit"
+            >Create listing</button>
         </form>
     </main>
 

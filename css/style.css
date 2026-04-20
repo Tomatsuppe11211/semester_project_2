@@ -216,6 +216,9 @@
   .inset-0 {
     inset: calc(var(--spacing) * 0);
   }
+  .start {
+    inset-inline-start: var(--spacing);
+  }
   .top-0 {
     top: calc(var(--spacing) * 0);
   }
@@ -295,11 +298,17 @@
   .h-15 {
     height: calc(var(--spacing) * 15);
   }
+  .h-20 {
+    height: calc(var(--spacing) * 20);
+  }
   .h-30 {
     height: calc(var(--spacing) * 30);
   }
   .h-40 {
     height: calc(var(--spacing) * 40);
+  }
+  .h-50 {
+    height: calc(var(--spacing) * 50);
   }
   .h-60 {
     height: calc(var(--spacing) * 60);
@@ -330,9 +339,6 @@
   }
   .w-1\/2 {
     width: calc(1 / 2 * 100%);
-  }
-  .w-1\/3 {
-    width: calc(1 / 3 * 100%);
   }
   .w-2 {
     width: calc(var(--spacing) * 2);
@@ -491,9 +497,6 @@
   .border-black {
     border-color: var(--color-black);
   }
-  .border-white {
-    border-color: var(--color-white);
-  }
   .bg-black {
     background-color: var(--color-black);
   }
@@ -605,12 +608,6 @@
     --tw-shadow-color: #000;
     @supports (color: color-mix(in lab, red, red)) {
       --tw-shadow-color: color-mix(in oklab, var(--color-black) var(--tw-shadow-alpha), transparent);
-    }
-  }
-  .inset-shadow-black {
-    --tw-inset-shadow-color: #000;
-    @supports (color: color-mix(in lab, red, red)) {
-      --tw-inset-shadow-color: color-mix(in oklab, var(--color-black) var(--tw-inset-shadow-alpha), transparent);
     }
   }
   .outline {
@@ -903,6 +900,11 @@
       height: calc(var(--spacing) * 130);
     }
   }
+  .lg\:w-2xl {
+    @media (width >= 64rem) {
+      width: var(--container-2xl);
+    }
+  }
   .lg\:w-3xl {
     @media (width >= 64rem) {
       width: var(--container-3xl);
@@ -1003,53 +1005,6 @@
   .dark\:text-white {
     &:where(.dark, .dark *) {
       color: var(--color-white);
-    }
-  }
-  .\[\&\:\:-webkit-calendar-picker-indicator\]\:rounded-full {
-    &::-webkit-calendar-picker-indicator {
-      border-radius: calc(infinity * 1px);
-    }
-  }
-  .\[\&\:\:-webkit-calendar-picker-indicator\]\:border {
-    &::-webkit-calendar-picker-indicator {
-      border-style: var(--tw-border-style);
-      border-width: 1px;
-    }
-  }
-  .\[\&\:\:-webkit-calendar-picker-indicator\]\:border-black {
-    &::-webkit-calendar-picker-indicator {
-      border-color: var(--color-black);
-    }
-  }
-  .\[\&\:\:-webkit-calendar-picker-indicator\]\:border-white {
-    &::-webkit-calendar-picker-indicator {
-      border-color: var(--color-white);
-    }
-  }
-  .\[\&\:\:-webkit-calendar-picker-indicator\]\:bg-hover {
-    &::-webkit-calendar-picker-indicator {
-      background-color: var(--color-hover);
-    }
-  }
-  .\[\&\:\:-webkit-calendar-picker-indicator\]\:bg-white {
-    &::-webkit-calendar-picker-indicator {
-      background-color: var(--color-white);
-    }
-  }
-  .\[\&\:\:-webkit-calendar-picker-indicator\]\:p-2 {
-    &::-webkit-calendar-picker-indicator {
-      padding: calc(var(--spacing) * 2);
-    }
-  }
-  .\[\&\:\:-webkit-calendar-picker-indicator\]\:text-white {
-    &::-webkit-calendar-picker-indicator {
-      color: var(--color-white);
-    }
-  }
-  .\[\&\:\:-webkit-calendar-picker-indicator\]\:invert {
-    &::-webkit-calendar-picker-indicator {
-      --tw-invert: invert(100%);
-      filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
     }
   }
   .dark\:\[\&\:\:-webkit-calendar-picker-indicator\]\:invert {
