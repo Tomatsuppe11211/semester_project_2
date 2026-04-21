@@ -1,6 +1,7 @@
 //Getting info for authentication
 const user = JSON.parse(sessionStorage.getItem('user'));
 const key = sessionStorage.getItem('key');
+const token = sessionStorage.getItem('token');
 
 
 //Adding arrays that will contain the listing information later
@@ -57,7 +58,15 @@ mediaUrl.addEventListener('invalid', function(e){
     })
 });
 
+endsAt.addEventListener('invalid', function(e){
+    if(e.target.validity.valueMissing){ //If empty
+        e.target.setCustomValidity('You must enter an expire date');
+    }
 
+    endsAt.addEventListener('input', function(e){
+        e.target.setCustomValidity(''); //Reset validity after displaying error message
+    })
+});
 
 //----------------------------------------------------------------------------------------------------------
 
@@ -107,15 +116,37 @@ createForm.addEventListener('submit', function(e){
         };
     };
 
-    console.log(mediaSent)
-
     let listing = {
         'title': titleInput.value,
         'description': descriptionInput.value,
-        'tags': '',
+        'tags': [],
         'media': mediaSent,
         'endsAt': endsAt.value
     };
 
-    console.log(listing);
+    async function postListing() {
+        try{
+            const response = await fetch('https://v2.api.noroff.dev/auction/listings', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`, 
+                    'Content-Type': 'application/json',
+                    'X-Noroff-API-Key': key
+                },
+                body: JSON.stringify(listing)
+            });
+
+            if(!response.ok){
+                const errorMessage = await response.json()
+                console.log(errorMessage.errors[0].message); //Reading error message
+                return
+            }
+
+            alert('Listing has been posted');
+        } catch(error){
+            console.error(error)
+        };
+    };
+
+    postListing();
 });

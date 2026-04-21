@@ -39,7 +39,7 @@ const listingsDisplay = document.getElementById('listingsDisplay');
 
 //Getting the listings
 async function getListings(){
-    const response = await fetch('https://v2.api.noroff.dev/auction/listings')
+    const response = await fetch('https://v2.api.noroff.dev/auction/listings?_active=true')
     const data = await response.json();
     const listings = data.data;
     console.log(listings);

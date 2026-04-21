@@ -13,6 +13,10 @@ emailInput.addEventListener('invalid', function(e){
     } else if(e.target.validity.patternMismatch){ //if mismatched email
         e.target.setCustomValidity('Your email must be an @stud.noroff.no'); 
     };
+
+    emailInput.addEventListener('input', function(e){
+        e.target.setCustomValidity(''); //Reset validity after displaying error message
+    });
 });
 
 passwordInput.addEventListener('invalid', function(e){
@@ -21,6 +25,10 @@ passwordInput.addEventListener('invalid', function(e){
     } else if(e.target.validity.patternMismatch){ //If mismatched password with pattern
         e.target.setCustomValidity('Your password must be at least 8 characters long')
     }
+
+    passwordInput.addEventListener('input', function(e){
+        e.target.setCustomValidity(''); //Reset validity after displaying error message
+    });
 });
 
 //Login function
@@ -53,6 +61,7 @@ loginForm.addEventListener('submit', async function(e){
         sessionStorage.setItem('user', JSON.stringify(data.data));
 
         const token = data.data.accessToken
+        sessionStorage.setItem('token', token);
 
         //Creating an API-Key
         async function createApiKey(){

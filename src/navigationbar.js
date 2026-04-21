@@ -133,8 +133,10 @@ const signOutStyle = 'size-8 hover:text-red hover:font-bold cursor-pointer';
 const currentUser = JSON.parse(sessionStorage.getItem('user'));
 if(currentUser && currentUser !== null){
     const key = sessionStorage.getItem('key');
+    const token = sessionStorage.getItem('token');
     console.log(currentUser);
     console.log(key);
+    console.log(token);
 
     //Making login and register links invisible
     deskLoginLink.classList = deskRegisterLink.classList = 

@@ -20,6 +20,10 @@ usernameinput.addEventListener('invalid', function(e){
     } else if(e.target.validity.paternMismatch){
         e.target.setCustomValidity('Username cannot accept special characters except _');
     };
+
+    usernameinput.addEventListener('input', function(e){
+        e.target.setCustomValidity(''); //Reset validity
+    })
 });
 
 emailInput.addEventListener('invalid', function(e){
@@ -28,6 +32,10 @@ emailInput.addEventListener('invalid', function(e){
     } else if(e.target.validity.paternMismatch){
         e.target.setCustomValidity('The email must contain @stud.noroff.no');
     };
+
+    emailInput.addEventListener('input', function(e){
+        e.target.setCustomValidity(''); //Reset validity
+    })
 });
 
 passwordInput.addEventListener('invalid', function(e){
@@ -36,12 +44,20 @@ passwordInput.addEventListener('invalid', function(e){
     } else if(e.target.validity.paternMismatch){
         e.target.setCustomValidity('Your password must contain at least 8 characters');
     };
+
+    passwordInput.addEventListener('input', function(e){
+        e.target.setCustomValidity(''); //Reset validity
+    })
 });
 
 confirmPasswordInput.addEventListener('invalid', function(e){
     if(e.target.validity.valueMissing){ //if empty
         e.target.setCustomValidity('You must enter a password');
     };
+
+    confirmPasswordInput.addEventListener('input', function(e){
+        e.target.setCustomValidity(''); //Reset validity
+    })
 });
 
 
