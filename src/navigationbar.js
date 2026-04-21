@@ -3,7 +3,11 @@ const headerLogo = document.getElementById('headerLogo');
 const footerLogo = document.getElementById('footerLogo');
 
 function logoSend(){
-    window.location.href = '../listings/index.html';
+    if(window.location.pathname.includes('/Policies')){
+        window.location.href = '../../listings/index.html';
+    } else {
+        window.location.href = '../listings/index.html';
+    }
 };
 
 if(headerLogo && footerLogo){
@@ -132,11 +136,7 @@ const signOutStyle = 'size-8 hover:text-red hover:font-bold cursor-pointer';
 //CHecking if there is any logged in users
 const currentUser = JSON.parse(sessionStorage.getItem('user'));
 if(currentUser && currentUser !== null){
-    const key = sessionStorage.getItem('key');
-    const token = sessionStorage.getItem('token');
     console.log(currentUser);
-    console.log(key);
-    console.log(token);
 
     //Making login and register links invisible
     deskLoginLink.classList = deskRegisterLink.classList = 
@@ -157,7 +157,12 @@ function signOut(){
         sessionStorage.removeItem('user');
         sessionStorage.removeItem('key');
 
-        window.location.href = '../index.html';
+        if(window.location.pathname.includes('/Policies')){
+            window.location.href = '../../index.html';
+        } else {
+            window.location.href = '../index.html';
+        }
+        
     }
 }
 
@@ -213,8 +218,25 @@ mobileSignOut.addEventListener('click', openSignOutModal);
 
 //Sending user to create listing page when clicking plus icon
 function sendToAddListing(){
-    window.location.href = '../create/index.html';
+    if(window.location.pathname.includes('/Policies')){
+        window.location.href = '../../create/index.html'
+    } else {
+        window.location.href = '../create/index.html';
+    }
+    
 };
 
 deskAddLink.addEventListener('click', sendToAddListing);
 mobileAddLink.addEventListener('click', sendToAddListing);
+
+//Sending the user to profile page when clicking on the profile icon
+function sendToProfile(){
+    if(window.location.pathname.includes('/Policies')){
+        window.location.href = '../../profiles/index.html';
+    } else {
+        window.location.href = '../profiles/index.html';
+    };
+};
+
+deskProfileLink.addEventListener('click', sendToProfile);
+mobileProfileLink.addEventListener('click', sendToProfile);
