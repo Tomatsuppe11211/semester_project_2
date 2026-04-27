@@ -109,7 +109,7 @@
         </svg>
     </header>
 
-    <main class="flex grow flex-col items-center justify-center dark:text-white gap-5 mb-5">
+    <main class="flex grow flex-col relative items-center justify-center dark:text-white gap-5 mb-5">
         <!--Mobile navigation-->
         <nav 
             id="mobileNav" 
@@ -210,32 +210,40 @@
             src="" 
             alt="Banner" 
             id="banner"
-            class="border-b-black h-30 md:h-40 lg:h-50 w-full"
+            class="border-b-black h-30 md:h-40 lg:h-70 w-full"
         >
 
         <!--Avatar-->
         <img
             alt="Avatar"
             id="avatar"
-            class="rounded-full h-30 w-30 border border-black mt-[-5rem]"
+            class="rounded-full h-30 w-30 md:h-45 md:w-45 lg:h-70 lg:w-70 border border-black -mt-20 md:-mt-30 lg:-mt-45"
         >
 
 
         <!--Profile details-->
-        <h1 id="username" class="text-2xl font-bold"></h1>
+        <div id="profile info" class="border border-black flex flex-col items-center gap-5 py-5 bg-white dark:bg-dark-header w-[90%] sm:w-md lg:w-xl xl:w-3xl my-2 md:my-5 lg:my-10">
+            <h1 id="username" class="text-2xl lg:text-4xl font-bold w-full text-center"></h1>
 
-        <!--Bio-->
-        <p id="bio" class="w-sm border flex justify-center"></p>
+            <!--Bio-->
+            <p id="bio" class="p-2 w-[90%] md:text-xl"></p>
 
-        <button 
-            id="edit" 
-            type="button" 
-            class="py-2 px-4 bg-button border border-black shadow-lg shadow-black"
-        >Edit bio</button>
-        
+            <button 
+                id="edit" 
+                type="button" 
+                class="py-1 md:py-2 px-3 md:px-4 bg-button border border-black shadow-lg shadow-black text-black hover:bg-hover hover:text-white cursor-pointer"
+            >Edit bio</button>
+        </div>
+
+
+        <!--Listings display-->
+        <div class="border border-black bg-white dark:bg-dark-header w-[90%] sm:w-md lg:w-xl xl:w-3xl flex flex-col gap-5 py-5 items-center">
+            <h1 class="text-xl lg:text-2xl font-bold w-full text-center">Your listings</h1>
+            <div id="display" class="flex flex-col md:flex-row md:flex-wrap items-center justify-between w-[90%]"></div>
+        </div>
     </main>
 
-    <footer class="flex flex-col lg:flex-row items-center border-t gap-10 py-5 lg:justify-evenly bg-white w-full dark:bg-dark-header dark:text-white dark:border-t-black">
+    <footer class="flex flex-col lg:flex-row items-center border-t py-5 lg:justify-evenly bg-white w-full dark:bg-dark-header dark:text-white dark:border-t-black gap-10">
         <div class="flex flex-col gap-2 text-center lg:text-start w-30">
             <h3 class="font-bold underline text-lg md:text-xl">Information</h3>
             <a href="../about/index.html" class="hover:underline hover:text-hover hover:font-bold md:text-lg">About us</a>
