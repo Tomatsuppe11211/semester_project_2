@@ -2,6 +2,7 @@
 const user = JSON.parse(sessionStorage.getItem('user'));
 const key = sessionStorage.getItem('key');
 const token = sessionStorage.getItem('token');
+if(!key){window.location.href = '../listings/index.html';}; //Sending user to listing page if not logged in
 
 
 //Getting all HTML elements we want to change
@@ -9,9 +10,17 @@ const banner = document.getElementById('banner');
 const avatar = document.getElementById('avatar');
 const userName = document.getElementById('username');
 const bio = document.getElementById('bio');
+const editBioButton = document.getElementById('edit');
 const listingDisplay = document.getElementById('display')
 
 
+//Sending user to a edit profile page when clicking on the button
+editBioButton.addEventListener('click', function(){
+    window.location.href = 'edit.html';
+});
+
+
+//Getting and displaying profile
 async function getProfileInfo(){
     try{
         const response = await fetch(`https://v2.api.noroff.dev/auction/profiles/${user.name}`, {
@@ -31,7 +40,6 @@ async function getProfileInfo(){
 
         const data = await response.json();
         const myData = data.data;
-        console.log(myData);
 
         banner.src = myData.banner.url;
         avatar.src = myData.avatar.url;
@@ -42,8 +50,6 @@ async function getProfileInfo(){
         } else {
             bio.innerHTML = myData.bio;
         };
-
-        console.log(myData.bio)
 
         //Fetching profile listings
         async function getListings(){
@@ -65,7 +71,6 @@ async function getProfileInfo(){
 
                 const data = await response.json();
                 const listings = data.data;
-                console.log(listings);
 
                 if(listings.length <= 2){
                     listingDisplay.classList = 'flex flex-col md:flex-row md:flex-wrap items-center justify-evenly w-[90%]'
@@ -149,4 +154,38 @@ async function getProfileInfo(){
     };
 };
 
-getProfileInfo();
+//Getting profile's bidding history
+async function getBiddings(){
+    await getProfileInfo()
+    
+    try{
+        const response = await fetch(`https://v2.api.noroff.dev/auction/profiles/${user.name}/bids?_listings`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`, 
+                'Content-Type': 'application/json',
+                'X-Noroff-API-Key': key
+            }
+        });
+
+        if(!response.ok){
+                const errorMessage = await response.json()
+                console.log(errorMessage.errors[0].message); //Reading error message
+                return
+        };
+
+        const data = await response.json();
+
+        //Checking array lenght and give message based on total biddings
+        if(data.length > 0){
+            console.log(data);
+        } else {
+            console.log('You have not bidded on anything yet');
+        };
+
+    }catch(error){
+        console.error(error)
+    };
+};
+
+getBiddings();

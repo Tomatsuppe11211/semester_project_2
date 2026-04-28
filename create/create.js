@@ -2,7 +2,7 @@
 const user = JSON.parse(sessionStorage.getItem('user'));
 const key = sessionStorage.getItem('key');
 const token = sessionStorage.getItem('token');
-
+if(!key){window.location.href = '../listings/index.html';}; //Sending user to listing page if not logged in
 
 //Adding arrays that will contain the listing information later
 let listingDetails = [];
