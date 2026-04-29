@@ -115,7 +115,10 @@ async function getProfileInfo(){
                     
                     
                     //Adding temporary functions. Will edit later
-                    editButton.addEventListener('click', function(){console.log('You clicked Edit')});
+                    editButton.addEventListener('click', function(){
+                        sessionStorage.setItem('editListing', JSON.stringify(listings[i]))
+                        window.location.href = '../edit_listing/index.html';
+                    });
                     
 
                     //Deleting function
