@@ -9,123 +9,105 @@ if(!key){window.location.href = '../listings/index.html';}; //Sending user to li
 const listingDetails = JSON.parse(sessionStorage.getItem('editListing'));
 console.log(listingDetails);
 
-
-let images = [];
-let imageCount = 0;
-
-
-//Fix this code! will not add images to array.
-
-if(listingDetails.media.length > 1){
-    for(let i = 0; i < listingDetails.media.length; i++){
-        images.push(listingDetails.media[i].url);
-        imageCount ++;
-    }
-    
-    console.log(images);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//Getting html elements
+//Adding title to the form
 const title = document.getElementById('titleInput');
 title.value = listingDetails.title;
 
+
+//Adding description to the form
 const description = document.getElementById('description');
-if(listingDetails.description!== '' || listingDetails.description !== null){
-    description.value = listingDetails.description;
-};
-
-const imageDrop = document.getElementById('imageDrop');
-
-const firstImage = document.getElementById('image1');
-if(listingDetails.appendChild())
+description.value = listingDetails.description;
 
 
-//Adding input fields for every image in the listing
-for(let i = 1; i < listingDetails.media.length; i++){
-    const field = document.createElement('input');
-    field.classList = 'border border-black w-full text-xl p-2 rounded-full shadow-inner shadow-black dark:bg-dark-header';
-    field.value = listingDetails.media[i].url;
-    field.pattern = 'https?://.+';
+//Getting the div where the images shall be put
+const drop = document.getElementById('imageDrop');
 
-    imageDrop.appendChild(field);
+let inputCount = 0
 
-    images.push(listingDetails.media[i].url);
-    imageCount ++;
-};
+//Adding already excisting images
+for(let i = 0; i < listingDetails.media.length; i++){
+    const urlInput = document.createElement('input')
+    urlInput.id = `input-${inputCount}`
+    urlInput.placeholder = 'Add image'
+    urlInput.value = listingDetails.media[i].url;
+    urlInput.classList = 'border border-black w-full text-xl p-2 rounded-full shadow-inner shadow-black dark:bg-dark-header';
+    urlInput.pattern = 'https?://.+';
 
+    if(urlInput.id === 'input-0'){
+        urlInput.required = true;
+
+        urlInput.addEventListener('invalid', function(e){
+            if(e.target.validity.patternMismatch){
+                e.target.setCustomValidity('The link must start with https://');
+            } else if(e.target.validity.valueMissing){
+                e.target.setCustomValidity('This field cannot be left empty');
+            };
+        });
+
+        urlInput.addEventListener('input', function(e){
+            e.target.setCustomValidity('');
+        });
+    } else {
+        urlInput.addEventListener('invalid', function(e){
+            if(e.target.validity.patternMismatch){
+                e.target.setCustomValidity('The link must start with https://')
+            } else {
+                e.target.setCustomValidity('');
+            }
+        })
+    }
+    drop.appendChild(urlInput);
+
+    inputCount ++;
+    console.log(`Total inputs: ${inputCount}`);
+}
+
+//Adding more input fields if button is pressed
 const addButton = document.getElementById('addButton');
 addButton.addEventListener('click', function(){
-    if(imageCount < 10){
-        let extra = document.createElement('input');
+    if(inputCount < 10){
+        const extra = document.createElement('input')
+        extra.id = `input-${inputCount}`;
         extra.classList = 'border border-black w-full text-xl p-2 rounded-full shadow-inner shadow-black dark:bg-dark-header';
         extra.pattern = 'https?://.+';
-        extra.placeholder = 'Add image url';
-        imageCount ++;
+        extra.placeholder = 'Add extra image';
 
-        imageDrop.appendChild(extra);
-    } 
+        drop.appendChild(extra);
+
+        inputCount ++;
+
+        extra.addEventListener('invalid', function(e){
+            if(e.target.validity.patternMismatch){
+                e.target.setCustomValidity('The link must start with https://')
+            }
+        })
+
+        extra.addEventListener('input', function(e){
+            e.target.setCustomValidity('');
+        });
+    } else {
+        alert('You can not add more than 10 images');
+    };
 });
 
-extra.addEventListener('invalid', function(e){
-    if(e.target.validity.patternMismatch && imageCount > 1){
-        e.target.setCustomvalidity('The url must start with https://');
-    }
+//Adding the original expire date and time
+const expireInput = document.getElementById('expireDate');
+expireInput.value = listingDetails.endsAt.slice(0, 16); //Slice removes the seconds from the expire date
 
-    if(e.target.validity.valueMissing && imageCount < 1){
-        e.target.setCustomvalidity('You must have at least 1 image');
-    }
+//adding a send function for images (just to test)
+editForm = document.getElementById('editForm');
 
-    extra.addEventListener('input', function(e){
-        e.target.setCustomvalidity('');
-    });
-});
+editForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    let images = [];
+    for (let i = 0; i < inputCount; i++){
+        const input = document.getElementById(`input-${i}`);
+        if(input.value !== null && input.value !== ''){
+            images.push(input.value);
+        } 
+    }
+    console.log(images);
+
+    //Sending data to API
+
+})
