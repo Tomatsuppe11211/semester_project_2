@@ -7,7 +7,6 @@ if(!key){window.location.href = '../listings/index.html';}; //Sending user to li
 
 //Getting listing details from the session storage
 const listingDetails = JSON.parse(sessionStorage.getItem('editListing'));
-console.log(listingDetails);
 
 //Adding title to the form
 const title = document.getElementById('titleInput');
@@ -59,7 +58,6 @@ for(let i = 0; i < listingDetails.media.length; i++){
     drop.appendChild(urlInput);
 
     inputCount ++;
-    console.log(`Total inputs: ${inputCount}`);
 }
 
 //Adding more input fields if button is pressed
@@ -90,10 +88,6 @@ addButton.addEventListener('click', function(){
     };
 });
 
-//Adding the original expire date and time
-const expireInput = document.getElementById('expireDate');
-expireInput.value = listingDetails.endsAt.slice(0, 16); //Slice removes the seconds from the expire date
-
 //adding a send function for images (just to test)
 editForm = document.getElementById('editForm');
 
@@ -103,11 +97,41 @@ editForm.addEventListener('submit', function(e){
     for (let i = 0; i < inputCount; i++){
         const input = document.getElementById(`input-${i}`);
         if(input.value !== null && input.value !== ''){
-            images.push(input.value);
+            images.push({'url': input.value, 'alt': `Image ${i}`});
         } 
     }
-    console.log(images);
 
     //Sending data to API
+    async function update(){
+        try{
+            const response = await fetch(`https://v2.api.noroff.dev/auction/listings/${listingDetails.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                    'X-Noroff-API-Key': key
+                },
+                body: JSON.stringify({
+                    'title': title.value,
+                    'description': description.value,
+                    'tags': [],
+                    'media': images,
+                })
+            })
 
+            if(!response.ok){
+                const message = await response.json();
+                console.log(message);
+                return; 
+            }
+
+            const data = await response.json();
+            alert('Listing is updated');
+            window.location.href = '../profiles/index.html';
+        } catch(error){
+            console.error(error);
+        }
+    }
+
+    update()
 })

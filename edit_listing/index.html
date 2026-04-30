@@ -109,7 +109,7 @@
         </svg>
     </header>
 
-    <main class="flex grow flex-col relative items-center justify-center dark:text-white gap-5 my-5">
+    <main class="flex grow flex-col relative items-center justify-center dark:text-white gap-5 my-10">
         <!--Mobile navigation-->
         <nav 
             id="mobileNav" 
@@ -225,17 +225,6 @@
 
             <div class="w-[90%]">
                 <button type="button" id="addButton" class="border border-black p-2 bg-button hover:bg-hover text-black cursor-pointer shadow-md shadow-black">Add more</button>
-            </div>
-            
-            <div class="flex flex-col gap-2 w-[90%] items-start">
-                <label for="expireDate" class="text-xl w-full">Expires at</label>
-                <!--Link to type example: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/datetime-local-->
-                <!--Link to check the styling of calendar picker indicator for input field: https://stackoverflow.com/questions/62162645/change-color-of-calendar-icon-in-html-date-input-->
-                <input 
-                    id="expireDate"
-                    type="datetime-local"
-                    class="dark:[&::-webkit-calendar-picker-indicator]:invert w-2/5 border border-black p-2 md:p-3 rounded-md shadow-inner shadow-black dark:bg-dark-header"
-                    required>
             </div>
 
             <button class="border border-black p-2 bg-button text-black hover:bg-hover cursor-pointer shadow-md shadow-black md:text-lg">Update listing</button>
