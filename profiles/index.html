@@ -109,7 +109,95 @@
         </svg>
     </header>
 
-    <main class="flex grow flex-col relative items-center justify-center dark:text-white gap-5 mb-5">
+    <!--Listing item modal-->
+    <div class="hidden" id="itemModal">
+        <div class="bg-white border border-black shadow-lg shadow-black w-4/5 md:w-2/3 lg:w-1/2 relative flex flex-col gap-5 items-center pb-5 overflow-y-auto max-w-[95%]">
+            <!--Close button-->
+            <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke-width="1.5" 
+                stroke="currentColor" 
+                id="closeItem"
+                class="size-8 hover:text-error absolute top-3 right-5 rounded-full bg-white cursor-pointer"
+            >
+                <path 
+                    stroke-linecap="round" 
+                    stroke-linejoin="round" 
+                    d="M6 18 18 6M6 6l12 12" 
+                />
+            </svg>
+
+            <img alt="Listing item" class="bg-black h-50 md:h-70 lg:h-100 w-full" id ="itemImage">
+            
+            <h1 id="listingTitle" class="w-[90%] text-xl md:text-2xl lg:text-3xl">Listing item</h1>
+            <p id="listingDescription" class="w-[90%] text-lg lg:text-xl">Description</p>
+            <p id="timer" class="w-[90%] text-lg lg:text-xl">Time left: 0</p>
+            <div id="listingHistory" class="flex flex-col w-[90%] gap-10 border"></div>
+
+            <div class="flex flex-row w-[90%] border">
+                <button id="seeHistory" class="w-1/3 p-2 border border-black cursor-pointer hover:bg-hover hover:text-white">History</button>
+                <button id="editItem" class="w-1/3 p-2 border border-black cursor-pointer hover:bg-hover hover:text-white">Edit</button>
+                <button id="deleteItem" class="w-1/3 p-2 border border-black cursor-pointer hover:bg-red hover:text-white">Delete</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!--history modal-->
+    <div class="hidden" id="historyModal">
+        <div class="bg-white border border-black w-4/5 md:w-2/3 lg:w-1/2 relative p-4 flex flex-col gap-5">
+            <!--Close button-->
+            <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke-width="1.5" 
+                stroke="currentColor" 
+                id="closeHistory"
+                class="size-8 hover:text-error absolute top-3 right-5 rounded-full cursor-pointer"
+            >
+                <path 
+                    stroke-linecap="round" 
+                    stroke-linejoin="round" 
+                    d="M6 18 18 6M6 6l12 12" 
+                />
+            </svg>
+
+            <!--Mini navigationbar for modal-->
+            <div class="flex flex-row w-full justify-evenly mt-10">
+                <h2 class="text-lg font-libre font-bold underline text-hover cursor-pointer" id="biddingsButton">Biddings</h2>
+                <h2 class="text-lg font-libre font-bold hover:text-hover hover:underline cursor-pointer" id="winningsButton">Winnings</h2>
+            </div>
+
+            <!--Biddings history-->
+            <div id="biddingHistory" class="flex flex-col gap-2 md:gap-5">
+                <div class="flex flex-row w-full">
+                    <p class="w-1/3 font-bold text-start">Name</p>
+                    <p class="w-1/3 font-bold text-center">Status</p>
+                    <p class="w-1/3 font-bold text-end">Current/final bid</p>
+                </div>
+
+                <!--Listings appears here-->
+                <div id="biddingsOverview"></div>
+            </div>
+
+            <!--winnings History-->
+            <div id="winningHistory" class="hidden">
+                <div class="flex flex-row w-full">
+                    <p class="w-2/3 font-bold text-start">Name</p>
+                    <p class="w-1/3 font-bold text-end">Current/final bid</p>
+                </div>
+
+                <!--Listings appears here-->
+                <div id="winningsOverview"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <main class="flex grow flex-col relative items-center justify-center dark:text-white gap-10 md:gap-15 mb-5">
         <!--Mobile navigation-->
         <nav 
             id="mobileNav" 
@@ -222,7 +310,7 @@
 
 
         <!--Profile details-->
-        <div id="profile info" class="border border-black flex flex-col items-center gap-5 py-5 bg-white dark:bg-dark-header w-[90%] sm:w-md lg:w-xl xl:w-3xl my-2 md:my-5 lg:my-10">
+        <div id="profile info" class="border border-black flex flex-col items-center gap-5 py-5 bg-white dark:bg-dark-header w-[90%] sm:w-md lg:w-xl xl:w-3xl shadow-lg shadow-black">
             <h1 id="username" class="text-2xl lg:text-4xl font-bold w-full text-center"></h1>
 
             <!--Bio-->
@@ -236,8 +324,11 @@
         </div>
 
 
+        <button id="historyButton" class="border border-black bg-button dark:bg-darkBG py-2 px-4 shadow-md shadow-black cursor-pointer hover:bg-hover">See history</button>
+
+
         <!--Listings display-->
-        <div class="border border-black bg-white dark:bg-dark-header w-[90%] sm:w-md lg:w-xl xl:w-3xl flex flex-col gap-5 py-5 items-center">
+        <div class="border border-black bg-white dark:bg-dark-header w-[90%] sm:w-md lg:w-xl xl:w-3xl flex flex-col gap-5 py-5 items-center shadow-lg shadow-black mb-10">
             <h1 class="text-xl lg:text-2xl font-bold w-full text-center">Your listings</h1>
             <div id="display" class="flex flex-col md:flex-row md:flex-wrap items-center justify-between w-[90%]"></div>
         </div>

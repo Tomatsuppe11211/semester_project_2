@@ -143,6 +143,7 @@ createForm.addEventListener('submit', function(e){
             }
 
             alert('Listing has been posted');
+            window.location.href = '../listings/index.html';
         } catch(error){
             console.error(error)
         };
