@@ -236,8 +236,14 @@
   .bottom-0 {
     bottom: calc(var(--spacing) * 0);
   }
+  .bottom-5 {
+    bottom: calc(var(--spacing) * 5);
+  }
   .bottom-10 {
     bottom: calc(var(--spacing) * 10);
+  }
+  .left-0 {
+    left: calc(var(--spacing) * 0);
   }
   .left-5 {
     left: calc(var(--spacing) * 5);
@@ -338,9 +344,6 @@
   }
   .h-screen {
     height: 100vh;
-  }
-  .max-h-\[90\%\] {
-    max-height: 90%;
   }
   .max-h-\[90vh\] {
     max-height: 90vh;
@@ -489,6 +492,9 @@
   .gap-20 {
     gap: calc(var(--spacing) * 20);
   }
+  .self-start {
+    align-self: flex-start;
+  }
   .overflow-y-auto {
     overflow-y: auto;
   }
@@ -513,10 +519,6 @@
   .border {
     border-style: var(--tw-border-style);
     border-width: 1px;
-  }
-  .border-y {
-    border-block-style: var(--tw-border-style);
-    border-block-width: 1px;
   }
   .border-t {
     border-top-style: var(--tw-border-style);

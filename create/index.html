@@ -8,7 +8,7 @@
     <script src="../src/navigationbar.js" defer></script>
     <script src="create.js" defer></script>
 </head>
-<body class="flex min-h-screen flex-col bg-lightBG dark:bg-darkBG gap-10">
+<body class="flex min-h-screen flex-col bg-lightBG dark:bg-darkBG">
     <header class="flex flex-row items-center justify-between w-full p-2 md:p-3 border-b bg-white dark:bg-dark-header dark:text-white dark:border-b-black">
         <!--logo-->
         <img src="../images/bidly-logo.png" class="h-15 ml-10 md:h-20 cursor-pointer" id="headerLogo">
@@ -109,7 +109,7 @@
         </svg>
     </header>
 
-    <main class="flex grow flex-col items-center justify-center dark:text-white">
+    <main class="flex grow flex-col dark:text-white">
         <!--Mobile navigation-->
         <nav 
             id="mobileNav" 
@@ -205,69 +205,72 @@
             </div>
         </nav>
 
-        <!--Create listing form-->
-        <form id="createForm" class="flex flex-col px-4 py-10 items-center w-[90%] sm:w-md md:w-lg lg:w-2xl border border-black bg-white dark:bg-darkBG gap-5 shadow-lg shadow-black">
-            <h1 class="text-center text-2xl md:text-3xl">Create a listing</h1>
+        <div class="flex w-full items-center justify-center my-10">
+            <!--Create listing form-->
+            <form id="createForm" class="flex flex-col px-4 py-10 items-center w-[90%] sm:w-md md:w-lg lg:w-2xl border border-black bg-white dark:bg-darkBG gap-5 shadow-lg shadow-black">
+                <h1 class="text-center text-2xl md:text-3xl">Create a listing</h1>
 
-            <div class="flex flex-col gap-2 w-full">
-                <label for="title" class="text-xl">Create a title</label>
-                <input 
-                    id="title"
-                    type="text" 
-                    placeholder="Create a title" 
-                    maxlength="30"
-                    class="p-2 border border-black rounded-full bg-white text-lg dark:bg-dark-header dark:text-white shadow-inner shadow-black"
-                    required
-                >
-            </div>
-
-            <div class="flex flex-col gap-2 w-full">
-                <label for="description" class="text-xl">Description</label>
-                <textarea 
-                    placeholder="Add a description" 
-                    class="p-2 border border-black rounded-lg bg-white text-lg dark:bg-dark-header dark:text-white shadow-inner shadow-black"
-                    id="description"
-                    required
-                ></textarea>
-            </div>
-
-            <div class="flex flex-col gap-5 items-start w-full">
-                <label for="urlInputs" class="text-xl">Add images</label>
-                
-                <div id="urlInputs" class="flex flex-col gap-2 w-full">
+                <div class="flex flex-col gap-2 w-full">
+                    <label for="title" class="text-xl">Create a title</label>
                     <input 
+                        id="title"
                         type="text" 
-                        placeholder="Add image url"
-                        class="p-2 border border-black rounded-full bg-white text-lg dark:bg-dark-header dark:text-white w-full shadow-inner shadow-black"
-                        id="mediaUrl"
-                        pattern="https?://.+"
+                        placeholder="Create a title" 
+                        maxlength="30"
+                        class="p-2 border border-black rounded-full bg-white text-lg dark:bg-dark-header dark:text-white shadow-inner shadow-black"
                         required
                     >
                 </div>
 
+                <div class="flex flex-col gap-2 w-full">
+                    <label for="description" class="text-xl">Description</label>
+                    <textarea 
+                        placeholder="Add a description" 
+                        class="p-2 border border-black rounded-lg bg-white text-lg dark:bg-dark-header dark:text-white shadow-inner shadow-black"
+                        id="description"
+                        required
+                    ></textarea>
+                </div>
+
+                <div class="flex flex-col gap-5 items-start w-full">
+                    <label for="urlInputs" class="text-xl">Add images</label>
+
+                    <div id="urlInputs" class="flex flex-col gap-2 w-full">
+                        <input 
+                            type="text" 
+                            placeholder="Add image url"
+                            class="p-2 border border-black rounded-full bg-white text-lg dark:bg-dark-header dark:text-white w-full shadow-inner shadow-black"
+                            id="mediaUrl"
+                            pattern="https?://.+"
+                            required
+                        >
+                    </div>
+
+                    <button 
+                        id="add" 
+                        class="p-2 border border-black bg-button hover:bg-hover text-black cursor-pointer shadow-md shadow-black"
+                        type="button"
+                    >Add more</button>
+                </div>
+
+                <div class="flex flex-col gap-2 w-full">
+                    <label for="expireDate" class="text-xl">Expires at</label>
+                    <!--Link to type example: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/datetime-local-->
+                    <!--Link to check the styling of calendar picker indicator for input field: https://stackoverflow.com/questions/62162645/change-color-of-calendar-icon-in-html-date-input-->
+                    <input 
+                        id="expireDate"
+                        type="datetime-local"
+                        class="dark:[&::-webkit-calendar-picker-indicator]:invert w-2/5 border border-black p-2 md:p-3 rounded-md shadow-inner shadow-black"
+                        required>
+                </div>
+
                 <button 
-                    id="add" 
-                    class="p-2 border border-black bg-button hover:bg-hover text-black cursor-pointer shadow-md shadow-black"
-                    type="button"
-                >Add more</button>
-            </div>
-
-            <div class="flex flex-col gap-2 w-full">
-                <label for="expireDate" class="text-xl">Expires at</label>
-                <!--Link to type example: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/datetime-local-->
-                <!--Link to check the styling of calendar picker indicator for input field: https://stackoverflow.com/questions/62162645/change-color-of-calendar-icon-in-html-date-input-->
-                <input 
-                    id="expireDate"
-                    type="datetime-local"
-                    class="dark:[&::-webkit-calendar-picker-indicator]:invert w-2/5 border border-black p-2 md:p-3 rounded-md shadow-inner shadow-black"
-                    required>
-            </div>
-
-            <button 
-                class="p-2 bg-button hover:bg-hover border border-black shadow-md shadow-black w-1/2 text-black cursor-pointer"
-                type="submit"
-            >Create listing</button>
-        </form>
+                    class="p-2 bg-button hover:bg-hover border border-black shadow-md shadow-black w-1/2 text-black cursor-pointer"
+                    type="submit"
+                >Create listing</button>
+            </form>
+        </div>
+        
     </main>
 
     <footer class="flex flex-col lg:flex-row items-center border-t gap-10 py-5 lg:justify-evenly bg-white w-full dark:bg-dark-header dark:text-white dark:border-t-black">

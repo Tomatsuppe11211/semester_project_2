@@ -109,7 +109,7 @@
         </svg>
     </header>
 
-    <main class="flex grow flex-col relative items-center justify-center dark:text-white gap-5 my-10">
+    <main class="flex grow flex-col relative items-center justify-center dark:text-white gap-5">
         <!--Mobile navigation-->
         <nav 
             id="mobileNav" 
@@ -205,30 +205,33 @@
             </div>
         </nav>
 
-        <form id="editForm" class="border border-black flex flex-col gap-10 py-10 w-4/5 md:w-1/2 items-center shadow-lg shadow-black bg-white dark:bg-darkBG">
-            <h1 class="text-xl md:text-2xl lg:text-3xl font-bold">Edit listing item</h1>
+        <div class="flex w-full items-center justify-center my-10">
+            <form id="editForm" class="border border-black flex flex-col gap-10 py-10 w-4/5 md:w-1/2 items-center shadow-lg shadow-black bg-white dark:bg-darkBG">
+                <h1 class="text-xl md:text-2xl lg:text-3xl font-bold">Edit listing item</h1>
+                
+                <div class="w-[90%] flex flex-col gap-2">
+                    <label for="titleInput" class="w-full text-xl">Title</label>
+                    <input type="text" id="titleInput" placeholder="Edit title" class="border border-black w-full text-xl p-2 rounded-full shadow-inner shadow-black dark:bg-dark-header">
+                </div>
+                
+                <div class="w-[90%] flex flex-col gap-2">
+                    <label for="description" class="w-full text-xl">Description</label>
+                    <textarea id="description" placeholder="Edit description" class="border border-black w-full text-xl p-2 shadow-inner shadow-black dark:bg-dark-header"></textarea>
+                </div>
             
-            <div class="w-[90%] flex flex-col gap-2">
-                <label for="titleInput" class="w-full text-xl">Title</label>
-                <input type="text" id="titleInput" placeholder="Edit title" class="border border-black w-full text-xl p-2 rounded-full shadow-inner shadow-black dark:bg-dark-header">
-            </div>
+                <div id="imageDrop" class="w-[90%] flex flex-col gap-2">
+                    <h2 class="text-xl w-full">Edit images</h2>
+                
+                </div>
             
-            <div class="w-[90%] flex flex-col gap-2">
-                <label for="description" class="w-full text-xl">Description</label>
-                <textarea id="description" placeholder="Edit description" class="border border-black w-full text-xl p-2 shadow-inner shadow-black dark:bg-dark-header"></textarea>
-            </div>
-
-            <div id="imageDrop" class="w-[90%] flex flex-col gap-2">
-                <h2 class="text-xl w-full">Edit images</h2>
-
-            </div>
-
-            <div class="w-[90%]">
-                <button type="button" id="addButton" class="border border-black p-2 bg-button hover:bg-hover text-black cursor-pointer shadow-md shadow-black">Add more</button>
-            </div>
-
-            <button class="border border-black p-2 bg-button text-black hover:bg-hover cursor-pointer shadow-md shadow-black md:text-lg">Update listing</button>
-        </form>
+                <div class="w-[90%]">
+                    <button type="button" id="addButton" class="border border-black p-2 bg-button hover:bg-hover text-black cursor-pointer shadow-md shadow-black">Add more</button>
+                </div>
+            
+                <button class="border border-black p-2 bg-button text-black hover:bg-hover cursor-pointer shadow-md shadow-black md:text-lg">Update listing</button>
+            </form>
+        </div>
+        
     </main>
 
     <footer class="flex flex-col lg:flex-row items-center border-t py-5 lg:justify-evenly bg-white w-full dark:bg-dark-header dark:text-white dark:border-t-black gap-10">

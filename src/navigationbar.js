@@ -1,3 +1,5 @@
+
+
 //Getting logos
 const headerLogo = document.getElementById('headerLogo');
 const footerLogo = document.getElementById('footerLogo');
@@ -137,6 +139,45 @@ const signOutStyle = 'size-8 hover:text-red hover:font-bold cursor-pointer';
 const currentUser = JSON.parse(sessionStorage.getItem('user'));
 if(currentUser && currentUser !== null){
     console.log(currentUser);
+    
+    //Retrieving User information
+    let user = JSON.parse(sessionStorage.getItem('user'));
+    let key = sessionStorage.getItem('key');
+    let token = sessionStorage.getItem('token');
+    if(!key){window.location.href = '../listings/index.html';}; //Sending user to listing page if not logged in
+
+    //Fetching single profile from auction house endpoint instead of auth
+    async function getProfile(){
+        const response = await fetch(`https://v2.api.noroff.dev/auction/profiles/${currentUser.name}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+                'X-Noroff-API-Key': key
+            }
+        });
+
+        const data = await response.json()
+        const currentProfile = data.data
+        console.log(currentProfile);
+
+        //Getting the body to add the credits display
+        const main = document.querySelector('main'); //Getting main elements
+        
+        const creditsDisplay = document.createElement('div');
+        creditsDisplay.classList = 'border py-2 h-fit w-35 text-center sticky bottom-0 left-0 bg-white self-start';
+
+        const showCredits = document.createElement('p');
+        showCredits.classList = 'text-xl';
+        showCredits.innerHTML = `Credits: ${currentProfile.credits}`;
+        creditsDisplay.appendChild(showCredits);
+
+        main.appendChild(creditsDisplay)
+    };
+
+    getProfile();
+
+    
 
     //Making login and register links invisible
     deskLoginLink.classList = deskRegisterLink.classList = 

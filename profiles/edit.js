@@ -54,7 +54,6 @@ async function getProfile(){
 
         const data = await response.json();
         const myData = data.data;
-        console.log(myData);
 
         avatarInput.value = myData.avatar.url;
         bannerInput.value = myData.banner.url;

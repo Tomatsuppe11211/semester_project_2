@@ -197,7 +197,7 @@
     </div>
 
 
-    <main class="flex grow flex-col relative items-center justify-center dark:text-white gap-10 md:gap-15 mb-5">
+    <main class="flex grow flex-col relative items-center justify-center dark:text-white">
         <!--Mobile navigation-->
         <nav 
             id="mobileNav" 
@@ -308,30 +308,36 @@
             class="rounded-full h-35 w-35 md:h-45 md:w-45 lg:h-70 lg:w-70 border border-black -mt-20 md:-mt-30 lg:-mt-45"
         >
 
+        <div class="flex flex-col gap-10 md:gap-15 mb-5 mt-10 items-center justify-center">
+            <!--Profile details-->
+            <div id="profile info" class="border border-black flex flex-col items-center gap-5 py-5 bg-white dark:bg-dark-header w-[90%] sm:w-md lg:w-xl xl:w-3xl shadow-lg shadow-black">
+                <h1 id="username" class="text-2xl lg:text-4xl font-bold w-full text-center"></h1>
 
-        <!--Profile details-->
-        <div id="profile info" class="border border-black flex flex-col items-center gap-5 py-5 bg-white dark:bg-dark-header w-[90%] sm:w-md lg:w-xl xl:w-3xl shadow-lg shadow-black">
-            <h1 id="username" class="text-2xl lg:text-4xl font-bold w-full text-center"></h1>
+                <!--Bio-->
+                <p id="bio" class="p-2 w-[90%] md:text-xl"></p>
 
-            <!--Bio-->
-            <p id="bio" class="p-2 w-[90%] md:text-xl"></p>
+                <button 
+                    id="edit" 
+                    type="button" 
+                    class="py-1 md:py-2 px-3 md:px-4 bg-button border border-black shadow-lg shadow-black text-black hover:bg-hover hover:text-white cursor-pointer"
+                >Edit profile</button>
+            </div>
 
-            <button 
-                id="edit" 
-                type="button" 
-                class="py-1 md:py-2 px-3 md:px-4 bg-button border border-black shadow-lg shadow-black text-black hover:bg-hover hover:text-white cursor-pointer"
-            >Edit profile</button>
+            <button id="historyButton" class="border border-black bg-button dark:bg-darkBG py-2 px-4 shadow-md shadow-black cursor-pointer hover:bg-hover w-fit">See history</button>
+
+            <!--Listings display-->
+            <div class="border border-black bg-white dark:bg-dark-header w-[90%] sm:w-md lg:w-xl xl:w-3xl flex flex-col gap-5 py-5 items-center shadow-lg shadow-black mb-10">
+                <h1 class="text-xl lg:text-2xl font-bold w-full text-center">Your listings</h1>
+                <div id="display" class="flex flex-col md:flex-row md:flex-wrap items-center justify-between w-[90%]"></div>
+            </div>
         </div>
+        
 
 
-        <button id="historyButton" class="border border-black bg-button dark:bg-darkBG py-2 px-4 shadow-md shadow-black cursor-pointer hover:bg-hover">See history</button>
+        
 
 
-        <!--Listings display-->
-        <div class="border border-black bg-white dark:bg-dark-header w-[90%] sm:w-md lg:w-xl xl:w-3xl flex flex-col gap-5 py-5 items-center shadow-lg shadow-black mb-10">
-            <h1 class="text-xl lg:text-2xl font-bold w-full text-center">Your listings</h1>
-            <div id="display" class="flex flex-col md:flex-row md:flex-wrap items-center justify-between w-[90%]"></div>
-        </div>
+        
     </main>
 
     <footer class="flex flex-col lg:flex-row items-center border-t py-5 lg:justify-evenly bg-white w-full dark:bg-dark-header dark:text-white dark:border-t-black gap-10">

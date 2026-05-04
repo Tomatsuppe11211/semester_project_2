@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/style.css">
     <script src="../src/navigationbar.js" defer></script>
 </head>
-<body class="flex min-h-screen flex-col bg-lightBG dark:bg-darkBG gap-10">
+<body class="flex min-h-screen flex-col bg-lightBG dark:bg-darkBG">
     <header class="flex flex-row items-center justify-between w-full p-2 md:p-3 border-b bg-white dark:bg-dark-header dark:text-white dark:border-b-black">
         <!--logo-->
         <img src="../../images/bidly-logo.png" class="h-15 ml-10 md:h-20 cursor-pointer" id="headerLogo">
@@ -204,20 +204,22 @@
             </div>
         </nav>
         
-        <form class="flex flex-col items-center w-[90%] sm:w-md md:w-lg lg:w-3xl rounded-lg border bg-white shadow-lg shadow-black gap-5 py-5 dark:text-white dark:bg-dark-header dark:border-black">
-            <h1 class="text-2xl font-bold font-libre">Contact us</h1>
-            <div class="flex flex-col w-full p-2 gap-2 items-center justify-center">
-                <label for="subject" class="text-lg md:text-xl w-[90%]">Subject</label>
-                <input type="text" placeholder="Subject..." id="subject" class="border w-[90%] px-4 py-2 text-lg rounded-full dark:border-black dark:bg-darkBG" required> 
-            </div>
+        <div class="flex w-full items-center justify-center my-10">
+            <form class="flex flex-col items-center w-[90%] sm:w-md md:w-lg lg:w-3xl rounded-lg border bg-white shadow-lg shadow-black gap-5 py-5 dark:text-white dark:bg-dark-header dark:border-black">
+                <h1 class="text-2xl font-bold font-libre">Contact us</h1>
+                <div class="flex flex-col w-full p-2 gap-2 items-center justify-center">
+                    <label for="subject" class="text-lg md:text-xl w-[90%]">Subject</label>
+                    <input type="text" placeholder="Subject..." id="subject" class="border w-[90%] px-4 py-2 text-lg rounded-full dark:border-black dark:bg-darkBG" required> 
+                </div>
 
-            <div class="flex flex-col w-full p-2 gap-2 items-center justify-center">
-                <label for="message" class="text-lg md:text-xl w-[90%]">Message</label>
-                <textarea placeholder="Enter your message" id="message" class="border w-[90%] h-30 lg:h-50 p-2 text-lg dark:border-black dark:bg-darkBG" required></textarea>
-            </div>
+                <div class="flex flex-col w-full p-2 gap-2 items-center justify-center">
+                    <label for="message" class="text-lg md:text-xl w-[90%]">Message</label>
+                    <textarea placeholder="Enter your message" id="message" class="border w-[90%] h-30 lg:h-50 p-2 text-lg dark:border-black dark:bg-darkBG" required></textarea>
+                </div>
 
-            <button class="p-2 border w-30 md:w-50 text-lg bg-button hover:bg-hover hover:text-white hover:border-black cursor-pointer dark:text-black">Send</button>
-        </form>
+                <button class="p-2 border w-30 md:w-50 text-lg bg-button hover:bg-hover hover:text-white hover:border-black cursor-pointer dark:text-black">Send</button>
+            </form>
+        </div>
     </main>
 
     <footer class="flex flex-col lg:flex-row items-center border-t gap-10 py-5 lg:justify-evenly bg-white w-full dark:bg-dark-header dark:text-white dark:border-t-black">
