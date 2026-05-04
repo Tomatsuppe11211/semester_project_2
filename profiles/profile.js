@@ -26,7 +26,7 @@ const winningsOverview = document.getElementById('winningsOverview');
 
 
 //Functions for open and close history modal
-openHistoryButton.addEventListener('click', function(){modal.classList = 'fixed flex inset-0 items-center justify-center bg-black/50 z-50 p-4'})
+openHistoryButton.addEventListener('click', function(){modal.classList = 'fixed flex inset-0 items-center justify-center bg-black/50 z-50 p-4 overflow-y-auto max-h-[90vh]'})
 closeHistoryButton.addEventListener('click', function(){modal.classList = 'hidden';});
 
 //Showing biddings when this button is clicked
@@ -63,7 +63,10 @@ const editItemButton = document.getElementById('editItem');
 const deleteItemButton = document.getElementById('deleteItem');
 
 //Adding function to close button
-closeItemModalButton.addEventListener('click', function(){itemModal.classList = 'hidden'});
+closeItemModalButton.addEventListener('click', function(){
+    itemModal.classList = 'hidden'; 
+    itemHistory.classList = 'hidden';
+});
 
 
 
@@ -115,7 +118,7 @@ async function getProfileInfo(){
         //Fetching profile listings
         async function getListings(){
             try{
-                const response = await fetch(`https://v2.api.noroff.dev/auction/profiles/${user.name}/listings`, {
+                const response = await fetch(`https://v2.api.noroff.dev/auction/profiles/${user.name}/listings?_bids=true`, {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${token}`, 
@@ -132,102 +135,145 @@ async function getProfileInfo(){
 
                 const data = await response.json();
                 const listings = data.data;
-                console.log(listings)
+                console.log(listings);
 
                 if(listings.length <= 2){
-                    listingDisplay.classList = 'flex flex-col md:flex-row md:flex-wrap items-center justify-evenly w-[90%]'
-                }
+                    listingDisplay.classList = 'flex flex-col md:flex-row md:flex-wrap items-center justify-evenly w-[90%]';
+                }; 
 
-                for(let i = 0; i < listings.length; i++){
-                    const listing = document.createElement('div');
-                    listing.classList = 'border border-black w-1/2 md:w-[10rem] lg:w-[12rem] flex flex-col gap-2 mb-5 shadow-lg shadow-black';
+                if(listings.length > 0){
+                    for(let i = 0; i < listings.length; i++){
+                        const listing = document.createElement('div');
+                        listing.classList = 'border border-black w-1/2 md:w-[10rem] lg:w-[12rem] flex flex-col gap-2 mb-5 shadow-lg shadow-black';
 
-                    const listingImage = document.createElement('img')
-                    listingImage.classList = 'w-full'
-                    listingImage.alt = 'Listing image';
-                    listingImage.src = listings[i].media[0].url;
-                    listing.appendChild(listingImage);
+                        const listingImage = document.createElement('img');
+                        listingImage.classList = 'w-full';
+                        listingImage.alt = 'Listing image';
+                        listingImage.src = listings[i].media[0].url;
+                        listing.appendChild(listingImage);
 
-                    const listingTitle = document.createElement('h2')
-                    if(listings[i].title.length > 15){
-                        listingTitle.innerHTML = `Listing ${i}`;
-                    } else {
-                        listingTitle.innerHTML = listings[i].title;
-                    };
+                        const listingTitle = document.createElement('h2');
+
+                        if(listings[i].title.length > 15){
+                            listingTitle.innerHTML = `Listing ${i}`;
+                        } else {
+                            listingTitle.innerHTML = listings[i].title;
+                        };
                     
                     
-                    listingTitle.classList = 'w-full px-1 font-semibold text-center lg:text-lg';
-                    listing.appendChild(listingTitle);
+                        listingTitle.classList = 'w-full px-1 font-semibold text-center lg:text-lg';
+                        listing.appendChild(listingTitle);
 
-                    const actions = document.createElement('div');
-                    actions.classList = 'w-full flex flex-row';
+                        const actions = document.createElement('div');
+                        actions.classList = 'w-full flex flex-row';
 
-                    listing.appendChild(actions);
-                    listingDisplay.appendChild(listing);
+                        listing.appendChild(actions);
+                        listingDisplay.appendChild(listing);
                     
                     
-                    //Adding information to the item modal
-                    listing.addEventListener('click', function(){
-                        let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-                        itemModal.classList = 'fixed flex inset-0 items-center justify-center bg-black/50 z-50 p-4';
+                        //Adding information to the item modal
+                        listing.addEventListener('click', function(){
+                            let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+                            itemModal.classList = 'fixed flex inset-0 items-center justify-center bg-black/50 z-50 p-4';
 
-                        let year = listings[i].endsAt.slice(0,4);
-                        let month = Number(listings[i].endsAt.slice(5,7));
-                        let day = listings[i].endsAt.slice(8,10);
-                        let time = listings[i].endsAt.slice(11,16);
+                            let year = listings[i].endsAt.slice(0,4);
+                            let month = Number(listings[i].endsAt.slice(5,7));
+                            let day = listings[i].endsAt.slice(8,10);
+                            let time = listings[i].endsAt.slice(11,16);
 
-                        let monthName = months[month - 1];
+                            let monthName = months[month - 1];
 
-                        
+                            itemImage.src = listings[i].media[0].url;
+                            itemTitle.innerHTML = listings[i].title;
+                            itemDescription.innerHTML = listings[i].description;
+                            itemTimer.innerHTML = `Ends at: ${monthName} ${day} ${year} at ${time}`;
 
-                        itemImage.src = listings[i].media[0].url;
-                        itemTitle.innerHTML = listings[i].title;
-                        itemDescription.innerHTML = listings[i].description;
-                        itemTimer.innerHTML = `Ends at: ${monthName} ${day} ${year} at ${time}`;
+                            //See bids to listing item function
+                            seeHistoryButton.addEventListener('click', async function(){
+                                itemHistory.innerHTML = ''; //Empty before filling up to prevent duplicates
 
-                        //See bids function
-                        biddingsButton.addEventListener('click', async function(){
-                            //Add function here
-                        });
+                                if(listings[i].bids.length > 0){
+                                    const titles = document.createElement('div');
+                                    titles.classList = 'w-full flex flex-row border-t border-black';
+
+                                    const nameDisplay = document.createElement('p');
+                                    nameDisplay.classList = 'w-1/2 text-start text-lg font-bold'
+                                    nameDisplay.innerHTML = 'Name';
+                                    titles.appendChild(nameDisplay);
+
+                                    const amountDisplay = document.createElement('p');
+                                    amountDisplay.classList = 'w-1/2 text-start text-lg font-bold';
+                                    amountDisplay.innerHTML = 'Amount';
+                                    titles.appendChild(amountDisplay);
+
+                                    itemHistory.appendChild(titles);
+
+                                    let bids = listings[i].bids;
+
+                                    for(let i = 0; i < bids.length; i++){
+                                        const bidding = document.createElement('div');
+                                        bidding.classList = 'flex flex-row w-full';
+
+                                        const name = document.createElement('p');
+                                        name.classList = 'w-1/2 text-start text-lg'
+                                        name.innerHTML = bids[i].bidder.name;
+                                        bidding.appendChild(name);
+
+                                        const amount = document.createElement('p');
+                                        amount.classList = 'w-1/2 text-start text-lg';
+                                        amount.innerHTML = `${bids[i].amount} credits`;
+                                        bidding.appendChild(amount);
+
+                                        itemHistory.appendChild(bidding);
+                                    };
+                                } else {
+                                    itemHistory.innerHTML = 'There are no biddings on this item yet'
+                                }
+
+                                itemHistory.classList = 'flex flex-col w-[90%] gap-5';
+                            });
 
 
-                        //Sending the user to the edit listing page with listing details
-                        editItemButton.addEventListener('click', function(){
-                            sessionStorage.setItem('editListing', JSON.stringify(listings[i]))
-                            window.location.href = '../edit_listing/index.html';
-                        });
+                            //Sending the user to the edit listing page with listing details
+                            editItemButton.addEventListener('click', function(){
+                                sessionStorage.setItem('editListing', JSON.stringify(listings[i]))
+                                window.location.href = '../edit_listing/index.html';
+                            });
 
-                        //Deleting function
-                        deleteItemButton.addEventListener('click', async function(){
-                            try{
-                                const response = await fetch(`https://v2.api.noroff.dev/auction/listings/${listings[i].id}`, {
-                                    method: 'DELETE',
-                                    headers: {
-                                        'Authorization': `Bearer ${token}`,
-                                        'X-Noroff-API-Key': key
-                                    }
-                                });
+                            //Deleting function
+                            deleteItemButton.addEventListener('click', async function(){
+                                try{
+                                    const response = await fetch(`https://v2.api.noroff.dev/auction/listings/${listings[i].id}`, {
+                                        method: 'DELETE',
+                                        headers: {
+                                            'Authorization': `Bearer ${token}`,
+                                            'X-Noroff-API-Key': key
+                                        }
+                                    });
 
-                                if(!response.ok){
-                                    console.log('There was an error deleting this post');
-                                    const mes = await response.json();
-                                    console.log(mes);
-                                    return;
-                                };
+                                    if(!response.ok){
+                                        console.log('There was an error deleting this post');
+                                        const mes = await response.json();
+                                        console.log(mes);
+                                        return;
+                                    };
 
-                                alert('Listing deleted');
-                            } catch(error){
-                                console.error(error)
-                            }
-                            window.location.href = 'index.html';
-                        });
-                    })
-                };
+                                    alert('Listing deleted');
+                                } catch(error){
+                                    console.error(error)
+                                }
+                                window.location.href = 'index.html';
+                            });
+                        })
+                    };  
+                } else {
+                    listingDisplay.innerHTML = ' You have no listing items yet';
+                    listingDisplay.classList = 'text-lg'
+                }   
             } catch(error){
                 console.error(error);
             };
         };
-
         getListings();
     } catch(error){
         console.error(error);
