@@ -37,7 +37,7 @@ function closemobileNav(){
 };
 
 function openMobileNav(){
-    mobileNav.classList = 'flex md:hidden fixed flex-col w-fit px-10 bg-white border-l top-0 right-0 px-2 h-screen gap-5 dark:bg-dark-header dark:text-white';
+    mobileNav.classList = 'flex md:hidden fixed flex-col w-fit px-10 bg-white border-l border-black top-0 right-0 px-2 h-screen gap-5 dark:bg-dark-header dark:text-white';
 };
 
 //Adding functions to buttons
@@ -138,7 +138,6 @@ const signOutStyle = 'size-8 hover:text-red hover:font-bold cursor-pointer';
 //CHecking if there is any logged in users
 const currentUser = JSON.parse(sessionStorage.getItem('user'));
 if(currentUser && currentUser !== null){
-    console.log(currentUser);
     
     //Retrieving User information
     let user = JSON.parse(sessionStorage.getItem('user'));
@@ -157,9 +156,8 @@ if(currentUser && currentUser !== null){
             }
         });
 
-        const data = await response.json()
-        const currentProfile = data.data
-        console.log(currentProfile);
+        const data = await response.json();
+        const currentProfile = data.data;
 
         //Getting the body to add the credits display
         const main = document.querySelector('main'); //Getting main elements

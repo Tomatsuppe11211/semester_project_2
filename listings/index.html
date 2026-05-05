@@ -8,22 +8,23 @@
     <script src="../src/navigationbar.js" defer></script>
     <script src="listings.js" defer type="module"></script>
 </head>
-<body class="flex min-h-full flex-col bg-lightBG">
+<body class="flex min-h-screen flex-col bg-lightBG dark:bg-darkBG">
     <header class="flex flex-row items-center justify-between w-full p-2 md:p-3 border-b bg-white dark:bg-dark-header dark:text-white dark:border-b-black">
         <!--logo-->
         <img src="../images/bidly-logo.png" class="h-15 ml-10 md:h-20 cursor-pointer" id="headerLogo">
 
 
         <!--Searchbar-->
-        <div class="border rounded-full flex flex-row items-center justify-center">
-            <input type="text" placeholder="Search" class="text-lg pl-2">
+        <div class="border border-black rounded-full flex flex-row items-center justify-center bg-white dark:bg-darkBG">
+            <input id="searchInput" type="text" placeholder="Search..." class="text-lg pl-2 rounded-l-full h-full">
             <svg 
                 xmlns="http://www.w3.org/2000/svg" 
                 fill="none" 
                 viewBox="0 0 24 24" 
                 stroke-width="1.5" 
-                stroke="currentColor" 
-                class="size-8 border-l w-15 hover:bg-hover hover:text-white hover:rounded-r-full hover:border-l-black cursor-pointer"
+                stroke="currentColor"
+                id="searchButton" 
+                class="size-8 border-l border-black w-15 hover:bg-hover hover:text-white hover:rounded-r-full hover:border-l-black cursor-pointer"
             >
                 <path 
                     stroke-linecap="round" 
@@ -188,7 +189,7 @@
             </div>
             
             <!--Product details-->
-            <div class="flex flex-col gap-2 p-2">
+            <div class="flex flex-col gap-2 p-2 bg-white dark:bg-darkBG dark:text-white">
                 <h1 id="productTitle" class="text-xl font-bold font-libre">Product title</h1>
                 <p id="seller" class="text-xl font-slab">Created by:</p>
                 <p id="productDescription" class="text-xl font-slab">Product description</p>
@@ -201,13 +202,13 @@
                 </div>
 
                 <div class="flex flex-col mt-5" id="listingHistory">
-                    <h2 class="text-lg font-bold font-libre">Bidding History</h2>
+                    <h2 class="hidden">Bidding History</h2>
                 </div>
             </div>
         </div>
     </div>
 
-    <main class="flex grow flex-col mt-15">
+    <main class="flex grow flex-col w-full relative items-center justify-center">
         <!--Mobile navigation-->
         <nav 
             id="mobileNav" 
@@ -303,10 +304,10 @@
             </div>
         </nav>
 
-        <div id="listingsDisplay" class="flex flex-row flex-wrap justify-evenly gap-10 my-10"></div>
+        <div id="listingsDisplay" class="grid grid-cols-3 w-4/5 gap-10 my-10 mt-15"></div>
     </main>
 
-    <footer class="flex flex-col lg:flex-row items-center border-t gap-10 py-5 lg:justify-evenly bg-white w-full">
+    <footer class="flex flex-col lg:flex-row items-center border-t border-black gap-10 py-5 lg:justify-evenly bg-white dark:bg-darkBG dark:text-white w-full">
         <div class="flex flex-col gap-2 text-center lg:text-start w-30">
             <h3 class="font-bold underline">Information</h3>
             <a href="../about/index.html" class="hover:underline hover:text-hover hover:font-bold">About us</a>

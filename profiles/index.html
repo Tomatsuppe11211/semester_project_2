@@ -111,7 +111,7 @@
 
     <!--Listing item modal-->
     <div class="hidden" id="itemModal">
-        <div class="bg-white border border-black shadow-lg shadow-black w-4/5 md:w-2/3 lg:w-1/2 relative flex flex-col gap-5 items-center pb-5 overflow-y-auto max-h-[95vh]">
+        <div class="bg-white border border-black shadow-lg shadow-black w-4/5 md:w-2/3 lg:w-1/2 relative flex flex-col gap-5 items-center pb-5 overflow-y-auto max-h-[95vh] bg-white dark:bg-darkBG dark:text-white">
             <!--Close button-->
             <svg 
                 xmlns="http://www.w3.org/2000/svg" 
@@ -120,7 +120,7 @@
                 stroke-width="1.5" 
                 stroke="currentColor" 
                 id="closeItem"
-                class="size-8 hover:text-error absolute top-3 right-5 rounded-full bg-white cursor-pointer"
+                class="size-8 hover:text-error absolute top-3 right-5 rounded-full bg-white cursor-pointer text-black"
             >
                 <path 
                     stroke-linecap="round" 
@@ -134,12 +134,13 @@
             <h1 id="listingTitle" class="w-[90%] text-xl md:text-2xl lg:text-3xl">Listing item</h1>
             <p id="listingDescription" class="w-[90%] text-lg lg:text-xl">Description</p>
             <p id="timer" class="w-[90%] text-lg lg:text-xl">Ending at:</p>
+            <p id="currentBid" class="w-[90%] text-lg lg:text-xl">Current bid:</p>
             <div id="listingHistory" class="flex flex-col w-[90%] gap-5"></div>
 
-            <div class="flex flex-row w-[90%] border">
-                <button id="seeHistory" class="w-1/3 p-2 border border-black cursor-pointer hover:bg-hover hover:text-white">History</button>
-                <button id="editItem" class="w-1/3 p-2 border border-black cursor-pointer hover:bg-hover hover:text-white">Edit</button>
-                <button id="deleteItem" class="w-1/3 p-2 border border-black cursor-pointer hover:bg-red hover:text-white">Delete</button>
+            <div class="flex flex-row w-[90%]">
+                <button id="seeHistory" class="w-1/3 p-2 border border-black cursor-pointer hover:bg-hover hover:text-white dark:bg-dark-header">History</button>
+                <button id="editItem" class="w-1/3 p-2 border border-black cursor-pointer hover:bg-hover hover:text-white dark:bg-dark-header">Edit</button>
+                <button id="deleteItem" class="w-1/3 p-2 border border-black cursor-pointer hover:bg-red hover:text-white dark:bg-dark-header">Delete</button>
             </div>
         </div>
     </div>
@@ -147,7 +148,7 @@
 
     <!--history modal-->
     <div class="hidden" id="historyModal">
-        <div class="bg-white border border-black w-4/5 md:w-2/3 lg:w-1/2 relative p-4 flex flex-col gap-15 overflow-y-auto max-h-[95%]">
+        <div class="bg-white border border-black w-4/5 md:w-2/3 lg:w-1/2 relative p-4 flex flex-col gap-15 overflow-y-auto max-h-[95vh]">
             <!--Close button-->
             <svg 
                 xmlns="http://www.w3.org/2000/svg" 
@@ -174,8 +175,7 @@
             <!--Biddings history-->
             <div id="biddingHistory" class="flex flex-col gap-2 md:gap-5">
                 <div class="flex flex-row w-full">
-                    <p class="w-1/3 font-bold text-start">Name</p>
-                    <p class="w-1/3 font-bold text-center">Status</p>
+                    <p class="w-2/3 font-bold text-start">Name</p>
                     <p class="w-1/3 font-bold text-end">Current/final bid</p>
                 </div>
 

@@ -57,6 +57,7 @@ const itemImage = document.getElementById('itemImage');
 const itemTitle = document.getElementById('listingTitle');
 const itemDescription = document.getElementById('listingDescription');
 const itemTimer = document.getElementById('timer');
+const currentBid = document.getElementById('currentBid');
 const itemHistory = document.getElementById('listingHistory');
 const seeHistoryButton = document.getElementById('seeHistory');
 const editItemButton = document.getElementById('editItem');
@@ -135,7 +136,6 @@ async function getProfileInfo(){
 
                 const data = await response.json();
                 const listings = data.data;
-                console.log(listings);
 
                 if(listings.length <= 2){
                     listingDisplay.classList = 'flex flex-col md:flex-row md:flex-wrap items-center justify-evenly w-[90%]';
@@ -194,6 +194,9 @@ async function getProfileInfo(){
                             itemTitle.innerHTML = listings[i].title;
                             itemDescription.innerHTML = listings[i].description;
                             itemTimer.innerHTML = `Ends at: ${monthName} ${day} ${year} at ${time}`;
+
+                            let bids = listings[i].bids.reverse();
+                            currentBid.innerHTML = `Current bid: ${bids[0].amount} credits`;
 
                             //See bids to listing item function
                             seeHistoryButton.addEventListener('click', async function(){
@@ -292,7 +295,7 @@ async function getBiddings(){
     await getProfileInfo()
     
     try{
-        const response = await fetch(`https://v2.api.noroff.dev/auction/profiles/${user.name}/bids?_listings`, {
+        const response = await fetch(`https://v2.api.noroff.dev/auction/profiles/${user.name}/bids?_listings=true`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`, 
@@ -312,7 +315,7 @@ async function getBiddings(){
 
         //Checking array lenght and give message based on total biddings
         console.log('Bidded on:');
-        console.log(data);
+        console.log(biddings);
 
         //Added listing items the user had bidded on in the overview
         if(biddings.length === 0){
@@ -328,7 +331,12 @@ async function getBiddings(){
 
                 const title = document.createElement('p');
                 title.classList = 'w-2/3 text-start';
-                title.innerHTML = 'Title'; //Change with actual title
+                if(biddings[i].title > 20){
+                    title.innerHTML = `${biddings[i].title.slice(0,20)}...`
+                } else {
+                    title.innerHTML = biddings[i].title; //Check if it works
+                }
+                
                 item.appendChild(title);
 
                 const bidding = document.createElement('p');
@@ -367,11 +375,10 @@ async function getWins() {
         const data = await response.json();
         const winnings = data.data;
 
-        console.log('Won:')
-        console.log(data)
+        console.log('Won:');
+        console.log(winnings);
 
         if(winnings.length === 0){
-            console.log('No biddings won yet');
             const message = document.createElement('p');
             message.innerHTML = 'No biddings won yet';
 
