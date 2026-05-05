@@ -149,7 +149,14 @@ async function getProfileInfo(){
                         const listingImage = document.createElement('img');
                         listingImage.classList = 'w-full';
                         listingImage.alt = 'Listing image';
-                        listingImage.src = listings[i].media[0].url;
+                        
+                        if(listings[i].media.length === 0){
+                            listingImage.src = 'https://images.unsplash.com/vector-1773501995769-cb593aed811c?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
+                        } else {
+                            listingImage.src = listings[i].media[0].url;
+                        }
+
+
                         listing.appendChild(listingImage);
 
                         const listingTitle = document.createElement('h2');
@@ -317,21 +324,16 @@ async function getBiddings(){
             //Update when making bidding function
             for(let i = 0; i < biddings.length; i++){
                 const item = document.createElement('div');
-                bidding.classList = 'flex flex-row w-full';
+                item.classList = 'flex flex-row w-full';
 
                 const title = document.createElement('p');
-                title.classList = 'w-1/3 text-start';
+                title.classList = 'w-2/3 text-start';
                 title.innerHTML = 'Title'; //Change with actual title
                 item.appendChild(title);
 
-                const status = document.createElement('p');
-                status.classList = 'w-1/3 text-center';
-                status.innerHTML = 'Active' //Change withactual status
-                item.appendChild(status);
-
                 const bidding = document.createElement('p');
                 bidding.classList = 'w-1/3 text-end';
-                bidding.innerHTML = `2000 credits`; //Change with actual credits bid
+                bidding.innerHTML = `${biddings[i].amount} credits`; //Check if it works
                 item.appendChild(bidding);
 
                 biddingsOverview.appendChild(item);

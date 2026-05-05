@@ -96,7 +96,11 @@ async function getListings(){
                 
                 modalTitle.innerHTML = details.title
 
-                modalProductSeller.innerHTML = `Seller <a href="#" class="text-blue-500 underline hover:text-button">${seller}</a>`
+                console.log(details)
+                sessionStorage.setItem('seeSingleProfile', details.seller.name);
+                console.log(sessionStorage.getItem('seeSingleProfile'));
+
+                modalProductSeller.innerHTML = `Seller <a href="../profiles/see.html" class="text-blue-500 underline hover:text-button">${seller}</a>`
 
                 if(details.description !== null | undefined){
                     modalDescription.innerHTML = details.description
@@ -114,10 +118,6 @@ async function getListings(){
                     bidder.innerHTML = `<a href="#" class="text-blue-500 underline hover:text-button">${biddings[i].bidder.name}</a> bidded ${biddings[i].amount} credits`
                     listingBiddingHistory.appendChild(bidder)
                 }
-
-                //Replacing standard content with actual listing details
-                console.log(details);
-                console.log(biddings); //making the newest bid be the first in the array
             }
 
             getSingleItem();

@@ -165,7 +165,7 @@ if(currentUser && currentUser !== null){
         const main = document.querySelector('main'); //Getting main elements
         
         const creditsDisplay = document.createElement('div');
-        creditsDisplay.classList = 'border py-2 h-fit w-35 text-center sticky bottom-0 left-0 bg-white self-start';
+        creditsDisplay.classList = 'border border-black py-2 h-fit w-35 text-center sticky bottom-0 left-0 bg-white self-start dark:bg-dark-header dark:text-white';
 
         const showCredits = document.createElement('p');
         showCredits.classList = 'text-xl';
