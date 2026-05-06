@@ -32,6 +32,27 @@ const modalBidButton = document.getElementById('modalBidButton');
 const listingBiddingHistory = document.getElementById('listingHistory');
 
 
+//Displaying user's available credits in each modal when logged in
+if(user){
+    async function getProfile(){
+        const response = await fetch(`https://v2.api.noroff.dev/auction/profiles/${currentUser.name}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+                'X-Noroff-API-Key': key
+            }
+        });
+
+        if(!response.ok){console.log('There was an error fetching the profile')};
+
+        const data = await response.json();
+        const credits = data.data.credits;
+        modalCreditDisplay.innerHTML = `Available credits: ${credits}`;
+    }
+
+    getProfile();
+}
 
 
 
@@ -50,7 +71,7 @@ async function getListings(){
 
     for(let i = 0; i < listings.length; i++){
         const itemDisplay = document.createElement('div'); //creating a div for each listing
-        itemDisplay.classList = 'flex flex-col h-fit w-full border cursor-pointer rounded-lg border border-black bg-white dark:bg-dark-header dark:text-white';
+        itemDisplay.classList = 'flex flex-col h-fit w-full border cursor-pointer rounded-lg border border-black bg-white dark:bg-dark-header dark:text-white shadow-lg shadow-black';
 
         const itemImages = listings[i].media; //Getting media
 
@@ -110,10 +131,18 @@ async function getListings(){
                     modalDescription.innerHTML = 'No description provided.'
                 }
 
-                modalCountdown.innerHTML = `Time left: ${details.endsAt}`
+                let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+                let year = details.endsAt.slice(0,4);
+                let month = Number(details.endsAt.slice(5,7));
+                let day = Number(details.endsAt.slice(8,10));
+                let time = details.endsAt.slice(11,16);
+                let monthName = months[month - 1];
+
+                modalCountdown.innerHTML = `Ends: ${day} of ${monthName} ${year} at ${time}`;
 
 
-                modalCurrentBidding.innerHTML = `Current bid: <strong>${JSON.stringify(biddings[0].amount)} credits</strong>`
+                modalCurrentBidding.innerHTML = `Current bid: ${JSON.stringify(biddings[0].amount)} credits`;
 
                 for(let i = 0; i < biddings.length; i++){
                     const bidder = document.createElement('p');
@@ -155,18 +184,19 @@ searchButton.addEventListener('click', async function(){
 
             const data = await response.json();
             const newListings = data.data;
-            console.log(newListings)
 
             //displaying new listings
             for(let i = 0; i < newListings.length; i++){
                 const listing = document.createElement('div');
-                listing.classList = 'flex flex-col h-fit w-full border cursor-pointer rounded-lg border border-black bg-white dark:bg-dark-header dark:text-white'
+                listing.classList = 'flex flex-col h-fit w-full border cursor-pointer rounded-lg border border-black bg-white dark:bg-dark-header dark:text-white shadow-lg shadow-black';
 
                 const listingImage = document.createElement('img');
-                if(newListings[i].media.length === 0){
-                    listingImage.src = 'https://images.unsplash.com/vector-1773501995769-cb593aed811c?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
-                } else {
+                if(newListings[i].media && newListings[i].media.length > 0 && newListings[i]?.media[0].url){
                     listingImage.src = newListings[i].media[0].url;
+                    listingImage.alt = newListings[i].media[0].alt;
+                } else {
+                    listingImage.src = 'https://images.unsplash.com/vector-1773501995769-cb593aed811c?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
+                    listingImage.alt = 'Item image';
                 };
                 listingImage.alt = 'Item image';
                 listingImage.classList = 'h-30 w-full md:h-40 lg:h-70 rounded-lg lg:rounded-none lg:rounded-tl-lg lg:rounded-tr-lg';
@@ -218,8 +248,8 @@ searchButton.addEventListener('click', async function(){
                     let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
                     let year = details.endsAt.slice(0,4);
-                    let month = details.endsAt.slice(5,7);
-                    let day = details.endsAt.slice(8,10);
+                    let month = Number(details.endsAt.slice(5,7));
+                    let day = Number(details.endsAt.slice(8,10));
                     let time = details.endsAt.slice(11,16);
                     let monthName = months[month - 1];
 
@@ -250,6 +280,73 @@ searchButton.addEventListener('click', async function(){
             }
         };
 
-        searchListings();
+
+        //Searching for other users if the user is logged in
+        if(user){
+            await searchListings()
+
+            async function getProfiles(){
+                const response = await fetch(`https://v2.api.noroff.dev/auction/profiles/search?q=${searchInput.value}`, {
+                    method: 'GET',
+                    headers: { 
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json',
+                        'X-Noroff-API-Key': key
+                    }
+                });
+
+                if(!response.ok){console.log('There was an error fetching profile(s)')};
+
+                const data = await response.json();
+                const profiles = data.data;
+                
+                //Adding the profiles be shown where the listings are supposed to be
+                for(let i = 0; i < profiles.length; i++){
+                    const profileCard = document.createElement('div');
+                    profileCard.classList = 'flex flex-col gap-5 h-fit w-full text-center items-center justify-evenly p-2 border cursor-pointer rounded-lg border border-black bg-white dark:bg-dark-header dark:text-white shadow-lg shadow-black hover:bg-hover hover:text-white';
+
+                    const profileImage = document.createElement('img');
+                    profileImage.classList = 'h-20 md:h-30 w-20 md:w-30 rounded-full border border-black'
+                    profileImage.src = profiles[i].avatar.url;
+                    profileImage.alt = 'Profile image';
+                    profileCard.appendChild(profileImage);
+
+                    const profileName = document.createElement('h1');
+                    profileName.classList = 'text-lg font-bold w-full';
+
+                    let maxlength = 0;
+
+                    //Checking screen width and adding a maxlength
+                    if(window.innerWidth <= 640){
+                        maxlength = 10;
+                    } else if(window.innerWidth <= 768){
+                        maxlength = 15;
+                    };
+
+                    //Deciding length of title based on the custom set maxlength
+                    if(maxlength && profiles[i].name.length > maxlength){
+                        profileName.innerHTML = `${profiles[i].name.slice(0,maxlength)}...`;
+                    } else {
+                        profileName.innerHTML = `${profiles[i].name}`;
+                    };
+                    
+                    profileCard.appendChild(profileName);
+
+
+                    listingsDisplay.appendChild(profileCard);
+
+                    profileCard.addEventListener('click', function(){
+                        sessionStorage.setItem('seeSingleProfile', profiles[i].name);
+                        window.location.href = '../profiles/see.html';
+                    });
+                };
+            };
+
+            getProfiles();
+        } else {
+            searchListings();
+        }
+    } else {
+        window.location.href = '../listings/index.html';
     }
 });

@@ -307,8 +307,8 @@ async function getListings(){
             });
         };  
     } else {
-        listingDisplay.innerHTML = ' You have no listing items yet';
-        listingDisplay.classList = 'text-lg';
+        display.innerHTML = `${seeUser} has no listings yet`;
+        display.classList = 'text-lg';
     };
 };
 
