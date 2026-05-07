@@ -130,9 +130,40 @@
         </svg>
     </header>
 
+    <!--Bidding modal-->
+    <div class="hidden" id="biddingModal">
+        <div class="flex flex-col relative justify-center items-center rounded-md border border-black shadow-lg shadow-black bg-white w-4/5 p-4 gap-5 dark:bg-dark-header dark:text-white">
+            <!--Close button-->
+                <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke-width="1.5" 
+                    stroke="currentColor" 
+                    id="closeBiddingModal"
+                    class="size-8 hover:text-error absolute top-3 right-5 cursor-pointer"
+                >
+                    <path 
+                        stroke-linecap="round" 
+                        stroke-linejoin="round" 
+                        d="M6 18 18 6M6 6l12 12" 
+                    />
+                </svg>
+            
+            <h1 id="biddingTitle" class="w-full text-xl text-center">Bidding window</h1>
+            <p id="itemTitle" class="w-full text-lg">Item title:</p>
+            <p id="latestBidding" class="w-full text-lg">Latest bidding:</p>
+            <form id="biddingForm" class="w-full">
+                <input id="creditValueInput" type="number" class=" py-1 border border-black shadow-inner shadow-black" required>
+                <button class="w-fit py-1 px-4 border border-black bg-button shadow-md shadow-black hover:bg-hover text-black cursor-pointer">Bid</button>
+            </form>
+        </div>
+    </div>
+
+
     <!--Product modal-->
     <div class="hidden" id="productModal">
-        <div class="border-black shadow-lg shadow-black bg-white rounded-lg w-md lg:w-xl relative overflow-y-auto max-h-[95vh]">
+        <div class="border-black shadow-lg shadow-black bg-white rounded-lg w-3/4 md:w-1/2 lg:w-2/5 relative overflow-y-auto max-h-[95vh]">
             
             <!--Image display-->
             <div class="flex flex-col relative h-100 w-full">
@@ -198,12 +229,12 @@
                 <p id="modalCreditDisplay" class="text-xl font-slab">Available credits: Login to bid on this product</p>
 
                 <div class="flex flex-row justify-evenly mt-5">
-                    <button id="modalBidButton" class="border border-black p-2 w-20 bg-button hover:bg-hover hover:text-white hover:font-bold rounded-lg shadow-md shadow-black cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed" disabled>Bid</button>
+                    <button id="modalBidButton" class="border border-black text-black p-2 w-20 bg-button hover:bg-hover hover:text-white hover:font-bold rounded-lg shadow-md shadow-black cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed" disabled>Bid</button>
                 </div>
 
-                <div class="flex flex-col mt-10" id="listingHistory">
-                    <h2 class="hidden">Bidding History</h2>
-                </div>
+                <h2 class="text-lg font-bold font-libre mt-10">Bidding History</h2>
+
+                <div class="flex flex-col" id="listingHistory"></div>
             </div>
         </div>
     </div>

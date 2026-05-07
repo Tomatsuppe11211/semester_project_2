@@ -313,10 +313,6 @@ async function getBiddings(){
         const data = await response.json();
         const biddings = data.data;
 
-        //Checking array lenght and give message based on total biddings
-        console.log('Bidded on:');
-        console.log(biddings);
-
         //Added listing items the user had bidded on in the overview
         if(biddings.length === 0){
             const message = document.createElement('p')
@@ -334,14 +330,14 @@ async function getBiddings(){
                 if(biddings[i].title > 20){
                     title.innerHTML = `${biddings[i].title.slice(0,20)}...`
                 } else {
-                    title.innerHTML = biddings[i].title; //Check if it works
+                    title.innerHTML = biddings[i].listing.title;
                 }
                 
                 item.appendChild(title);
 
                 const bidding = document.createElement('p');
                 bidding.classList = 'w-1/3 text-end';
-                bidding.innerHTML = `${biddings[i].amount} credits`; //Check if it works
+                bidding.innerHTML = `${biddings[i].amount} credits`;
                 item.appendChild(bidding);
 
                 biddingsOverview.appendChild(item);
@@ -374,9 +370,6 @@ async function getWins() {
 
         const data = await response.json();
         const winnings = data.data;
-
-        console.log('Won:');
-        console.log(winnings);
 
         if(winnings.length === 0){
             const message = document.createElement('p');
