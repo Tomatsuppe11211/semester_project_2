@@ -26,6 +26,8 @@ const modalCurrentBidding = document.getElementById('currentBidding');
 const modalCreditDisplay = document.getElementById('modalCreditDisplay');
 const modalBidButton = document.getElementById('modalBidButton');
 const listingBiddingHistory = document.getElementById('listingHistory');
+const leftArrow = document.getElementById('leftArrow');
+const rightArrow = document.getElementById('rightArrow');
 
 //For the bidding modal
 const biddingModal = document.getElementById('biddingModal');
@@ -237,6 +239,12 @@ async function getListings(){
                 const biddings = details.bids.sort((a, b) => b.amount - a.amount);
                 const seller = details.seller.name;
 
+                if(seller === user.name){
+                    modalBidButton.setAttribute('disabled', 'true');
+                } else {
+                    modalBidButton.removeAttribute('disabled');
+                }
+
                 if(!response.ok){
                     console.log('An error occcured fetching listing item')
                 };
@@ -244,7 +252,50 @@ async function getListings(){
                 //Resets history section if user swaps between listing items
                 listingBiddingHistory.innerHTML = ''
 
+                //Letting the user swap images (down/back)
+                let imageNumber = 0
+                if(listings[i].media.length > 1){
+                    leftArrow.classList = 'size-15 absolute left-5 bottom-10 rounded-full bg-button hover:bg-hover hover:text-white shadow-xl shadow-black'
+                    rightArrow.classList = 'size-15 absolute right-5 bottom-10 rounded-full bg-button hover:bg-hover hover:text-white shadow-xl shadow-black'
+
+                    leftArrow.addEventListener('click', function(){
+                        console.log('clicked')
+                        imageNumber --;
+
+                        if(imageNumber < 0){
+                            imageNumber = listings[i].media.length - 1;
+                        }
+
+                        modalImages.src = listings[i].media[imageNumber].url;
+                        modalImages.alt = listings[i].media[imageNumber].alt;
+                    });
+
+                    rightArrow.addEventListener('click', function(){
+                        imageNumber ++;
+                        console.log(imageNumber)
+
+                        if(imageNumber >= listings[i].media.length){
+                            imageNumber = 0;
+                        }
+
+                        modalImages.src = listings[i].media[imageNumber].url;
+                        modalImages.alt = listings[i].media[imageNumber].alt;
+                    });
+                } else {
+                    leftArrow.classList = 'hidden';
+                    rightArrow.classList = 'hidden';
+                }
+                
+
+                
+
+                
+
                 //Changing current information for the modal
+                for(let i = 0; i < listings[i].media.length; i++){
+                    console.log(listings[i].media[i].url);
+                }
+
                 modalImages.src = thumbnailImage.src
                 
                 modalTitle.innerHTML = details.title
@@ -367,9 +418,15 @@ searchButton.addEventListener('click', async function(){
                     async function getSingleItem(){
                         const response = await fetch(`https://v2.api.noroff.dev/auction/listings/${newListings[i].id}?_bids=true&_seller=true`)
                         const data = await response.json();
-                        const details = data.data
+                        const details = data.data;
                         const biddings = details.bids.sort((a, b) => b.amount - a.amount)
                         const seller = details.seller.name;
+
+                        if(seller === user.name){
+                            modalBidButton.setAttribute('disabled', 'true');
+                        } else {
+                            modalBidButton.removeAttribute('disabled');
+                        }
 
                         if(!response.ok){
                             console.log('An error occcured fetching listing item')
@@ -377,6 +434,42 @@ searchButton.addEventListener('click', async function(){
 
                         //Resets history section if user swaps between listing items
                         listingBiddingHistory.innerHTML = '';
+
+                        
+                        console.log(details.media);
+                        //Letting the user swap images (down/back)
+                        let imageNumber = 0
+                        if(details.media.length > 1){
+                            leftArrow.classList = 'size-15 absolute left-5 bottom-10 rounded-full bg-button hover:bg-hover hover:text-white shadow-xl shadow-black'
+                            rightArrow.classList = 'size-15 absolute right-5 bottom-10 rounded-full bg-button hover:bg-hover hover:text-white shadow-xl shadow-black'
+
+                            leftArrow.addEventListener('click', function(){
+                                imageNumber --;
+
+                                if(imageNumber < 0){
+                                    imageNumber = details.media.length - 1;
+                                }
+
+                                modalImages.src = details.media[imageNumber].url;
+                                modalImages.alt = details.media[imageNumber].alt;
+                            });
+
+                            rightArrow.addEventListener('click', function(){
+                                imageNumber +=1;
+
+                                if(imageNumber >= details.media.length){
+                                    imageNumber = 0;
+                                }
+
+                                modalImages.src = details.media[imageNumber].url;
+                                modalImages.alt = details.media[imageNumber].alt;
+                            });
+                        } else {
+                            leftArrow.classList = 'hidden';
+                            rightArrow.classList = 'hidden';
+                        }
+                        
+                        
 
                         //Changing current information for the modal
                         modalImages.src = listingImage.src
@@ -510,7 +603,7 @@ const tagInput = document.getElementById('tagSearch');
 const tagButton = document.getElementById('tagButton');
 
 tagButton.addEventListener('click', async function(){
-    const response = await fetch(`https://v2.api.noroff.dev/auction/listings?_tag=${tagInput.value}&_active=true`, {
+    const response = await fetch(`https://v2.api.noroff.dev/auction/listings?_tag=${tagInput.value}&_active=true&_seller=true&_bids=true`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -527,7 +620,6 @@ tagButton.addEventListener('click', async function(){
     const taggedListings = data.data;
 
     if(taggedListings.length > 0){
-        console.log(taggedListings);
 
         listingsDisplay.innerHTML = '';
 
@@ -563,6 +655,48 @@ tagButton.addEventListener('click', async function(){
             }
 
             listingsDisplay.appendChild(item);
+
+            //Adding details to product modal
+            item.addEventListener('click', function(){
+                if(taggedListings[i].seller.name === user.name){
+                    modalBidButton.setAttribute('disabled', 'true');
+                } else {
+                    modalBidButton.removeAttribute('disabled');
+                }
+
+                sessionStorage.setItem('biddingItem', taggedListings[i].id);
+
+                productModal.classList = 'fixed flex inset-0 items-center justify-center bg-black/50 z-50 p-4';
+
+                modalImages.src = taggedListings[i].media[0].url;
+                modalImages.alt = taggedListings[i].media[0].alt;
+                modalTitle.innerHTML = taggedListings[i].title;
+                modalProductSeller.innerHTML = `Created by ${taggedListings[i].seller.name}`;
+                modalDescription.innerHTML = taggedListings[i].description;
+                
+                
+                
+                let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+                let year = taggedListings[i].endsAt.slice(0,4);
+                let month = Number(taggedListings[i].endsAt.slice(5,7));
+                let day = Number(taggedListings[i].endsAt.slice(8,10));
+                let time = taggedListings[i].endsAt.slice(11,16);
+                let monthName = months[month - 1];
+
+                modalCountdown.innerHTML = `Ends: ${day} of ${monthName} ${year} at ${time}`;
+
+                let bids = taggedListings[i].bids.sort((a, b) => b.amount - a.amount); //Sorting so biggest/latest bidding is showinf first
+                modalCurrentBidding.innerHTML = `Current bidding: ${bids[0].amount} credits`;
+                
+                listingBiddingHistory.innerHTML = ''; //Reseting bidding history so no duplications is made
+
+                for(let i = 0; i < bids.length; i++){
+                    const bidding = document.createElement('p');
+                    bidding.innerHTML = `${bids[i].bidder.name} bidded ${bids[i].amount} credits`;
+                    listingBiddingHistory.appendChild(bidding);
+                }
+            })
         };
     } else {
         listingsDisplay.innerHTML = '';
