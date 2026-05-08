@@ -214,7 +214,7 @@ function openSignOutModal(){
     modal.classList = 'flex fixed inset-0 items-center justify-center bg-black/50 z-50 overflow-y-auto p-4';
 
     modalDisplay = document.createElement('div');
-    modalDisplay.classList = 'flex flex-col text-center bg-white dark:bg-darkBG dark:text-white p-2 md:p-4 w-2/3 md:w-1/4 gap-5 shadow-lg shadow-black';
+    modalDisplay.classList = 'flex flex-col text-center bg-white dark:bg-darkBG dark:text-white p-2 md:p-4 w-2/3 md:w-3/4 gap-5 shadow-lg shadow-black';
     modal.appendChild(modalDisplay);
 
     const modalTitle = document.createElement('h1');

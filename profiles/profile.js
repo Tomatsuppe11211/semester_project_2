@@ -353,7 +353,7 @@ async function getWins() {
     await getBiddings()
     
     try{
-        const response = await fetch(`https://v2.api.noroff.dev/auction/profiles/${user.name}/wins?_listings`, {
+        const response = await fetch(`https://v2.api.noroff.dev/auction/profiles/${user.name}/wins?_bids=true`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`, 
@@ -383,12 +383,12 @@ async function getWins() {
 
                 const title = document.createElement('p');
                 title.classList = 'w-2/3 text-start';
-                title.innerHTML = 'Title'; //Change with actual title
+                title.innerHTML = `${winnings[i].title}`;
                 item.appendChild(title);
 
                 const bidding = document.createElement('p');
                 bidding.classList = 'w-1/3 text-end';
-                bidding.innerHTML = '20000 credits'; //Change with actual bidding
+                bidding.innerHTML = `${winnings[i].bids.sort((a, b) => b.amount - a.amount)[0].amount} credits`;
                 item.appendChild(bidding);
 
                 winningsOverview.appendChild(item);

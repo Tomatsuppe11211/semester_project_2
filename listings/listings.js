@@ -239,7 +239,7 @@ async function getListings(){
                 const biddings = details.bids.sort((a, b) => b.amount - a.amount);
                 const seller = details.seller.name;
 
-                if(seller === user.name){
+                if(!user || seller === user.name){
                     modalBidButton.setAttribute('disabled', 'true');
                 } else {
                     modalBidButton.removeAttribute('disabled');
@@ -259,7 +259,6 @@ async function getListings(){
                     rightArrow.classList = 'size-15 absolute right-5 bottom-10 rounded-full bg-button hover:bg-hover hover:text-white shadow-xl shadow-black'
 
                     leftArrow.addEventListener('click', function(){
-                        console.log('clicked')
                         imageNumber --;
 
                         if(imageNumber < 0){
@@ -272,7 +271,6 @@ async function getListings(){
 
                     rightArrow.addEventListener('click', function(){
                         imageNumber ++;
-                        console.log(imageNumber)
 
                         if(imageNumber >= listings[i].media.length){
                             imageNumber = 0;
@@ -284,16 +282,6 @@ async function getListings(){
                 } else {
                     leftArrow.classList = 'hidden';
                     rightArrow.classList = 'hidden';
-                }
-                
-
-                
-
-                
-
-                //Changing current information for the modal
-                for(let i = 0; i < listings[i].media.length; i++){
-                    console.log(listings[i].media[i].url);
                 }
 
                 modalImages.src = thumbnailImage.src
@@ -326,7 +314,7 @@ async function getListings(){
                     listingBiddingHistory.innerHTML = 'No one has bidded on this item.'
                     modalCurrentBidding.innerHTML = 'Current bid: 0 credits';
                 } else {
-                    if(user && biddings[0].bidder.name === user.name){
+                    if(!user || biddings[0].bidder.name === user.name){
                         modalCurrentBidding.innerHTML = `Current bid: ${JSON.stringify(biddings[0].amount)} credits (Yours)`;
                     } else {
                         modalCurrentBidding.innerHTML = `Current bid: ${JSON.stringify(biddings[0].amount)} credits`;
@@ -422,7 +410,7 @@ searchButton.addEventListener('click', async function(){
                         const biddings = details.bids.sort((a, b) => b.amount - a.amount)
                         const seller = details.seller.name;
 
-                        if(seller === user.name){
+                        if(!user || seller === user.name){
                             modalBidButton.setAttribute('disabled', 'true');
                         } else {
                             modalBidButton.removeAttribute('disabled');
@@ -435,8 +423,6 @@ searchButton.addEventListener('click', async function(){
                         //Resets history section if user swaps between listing items
                         listingBiddingHistory.innerHTML = '';
 
-                        
-                        console.log(details.media);
                         //Letting the user swap images (down/back)
                         let imageNumber = 0
                         if(details.media.length > 1){
@@ -455,7 +441,7 @@ searchButton.addEventListener('click', async function(){
                             });
 
                             rightArrow.addEventListener('click', function(){
-                                imageNumber +=1;
+                                imageNumber ++;
 
                                 if(imageNumber >= details.media.length){
                                     imageNumber = 0;
@@ -658,7 +644,7 @@ tagButton.addEventListener('click', async function(){
 
             //Adding details to product modal
             item.addEventListener('click', function(){
-                if(taggedListings[i].seller.name === user.name){
+                if(user && taggedListings[i].seller.name === user.name){
                     modalBidButton.setAttribute('disabled', 'true');
                 } else {
                     modalBidButton.removeAttribute('disabled');
@@ -670,6 +656,46 @@ tagButton.addEventListener('click', async function(){
 
                 modalImages.src = taggedListings[i].media[0].url;
                 modalImages.alt = taggedListings[i].media[0].alt;
+
+                if(taggedListings[i].media.length > 1){
+                    console.log(taggedListings[i].media);
+
+                    leftArrow.classList = 'size-15 absolute left-5 bottom-10 rounded-full bg-button hover:bg-hover hover:text-white shadow-xl shadow-black';
+                    rightArrow.classList = 'size-15 absolute right-5 bottom-10 rounded-full bg-button hover:bg-hover hover:text-white shadow-xl shadow-black';
+
+                    let imageNumber = 0;
+
+                    leftArrow.addEventListener('click', function(){
+                        imageNumber --;
+                        
+                        if(imageNumber < 0){
+                            imageNumber = taggedListings[i].media.length - 1;
+                        }
+
+                        modalImages.src = taggedListings[i].media[imageNumber].url;
+                        modalImages.alt = taggedListings[i].media[imageNumber].alt;
+                    });
+
+                    rightArrow.addEventListener('click', function(){
+                        imageNumber ++;
+
+                        if(imageNumber >= taggedListings[i].media.length){
+                            imageNumber = 0;
+                        };
+
+                        modalImages.src = taggedListings[i].media[imageNumber].url;
+                        modalImages.alt = taggedListings[i].media[imageNumber].alt;
+                    })
+
+
+                } else {
+                    leftArrow.classList = 'hidden';
+                    rightArrow.classList = 'hidden';
+                }
+
+
+
+
                 modalTitle.innerHTML = taggedListings[i].title;
                 modalProductSeller.innerHTML = `Created by ${taggedListings[i].seller.name}`;
                 modalDescription.innerHTML = taggedListings[i].description;
