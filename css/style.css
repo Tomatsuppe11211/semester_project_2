@@ -581,6 +581,15 @@
   .bg-cover {
     background-size: cover;
   }
+  .p-0 {
+    padding: calc(var(--spacing) * 0);
+  }
+  .p-0\.5 {
+    padding: calc(var(--spacing) * 0.5);
+  }
+  .p-1 {
+    padding: calc(var(--spacing) * 1);
+  }
   .p-2 {
     padding: calc(var(--spacing) * 2);
   }
@@ -601,6 +610,12 @@
   }
   .px-10 {
     padding-inline: calc(var(--spacing) * 10);
+  }
+  .py-0 {
+    padding-block: calc(var(--spacing) * 0);
+  }
+  .py-0\.5 {
+    padding-block: calc(var(--spacing) * 0.5);
   }
   .py-1 {
     padding-block: calc(var(--spacing) * 1);

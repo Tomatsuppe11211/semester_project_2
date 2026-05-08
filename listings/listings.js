@@ -275,7 +275,7 @@ async function getListings(){
                     listingBiddingHistory.innerHTML = 'No one has bidded on this item.'
                     modalCurrentBidding.innerHTML = 'Current bid: 0 credits';
                 } else {
-                    if(biddings[0].bidder.name === user.name){
+                    if(user && biddings[0].bidder.name === user.name){
                         modalCurrentBidding.innerHTML = `Current bid: ${JSON.stringify(biddings[0].amount)} credits (Yours)`;
                     } else {
                         modalCurrentBidding.innerHTML = `Current bid: ${JSON.stringify(biddings[0].amount)} credits`;
@@ -409,7 +409,7 @@ searchButton.addEventListener('click', async function(){
                     }
 
                     if(biddings.length > 0){
-                        if(biddings[0].bidder.name === user.name){
+                        if(user && biddings[0].bidder.name === user.name){
                             modalCurrentBidding.innerHTML = `Current bid: ${biddings[0].amount} credits (Yours)`;
                         } else {
                             modalCurrentBidding.innerHTML = `Current bid: ${biddings[0].amount} credits`;
@@ -500,3 +500,80 @@ searchButton.addEventListener('click', async function(){
         window.location.href = '../listings/index.html';
     }
 });
+
+
+
+
+
+//Adding the tag search
+const tagInput = document.getElementById('tagSearch');
+const tagButton = document.getElementById('tagButton');
+
+tagButton.addEventListener('click', async function(){
+    const response = await fetch(`https://v2.api.noroff.dev/auction/listings?_tag=${tagInput.value}&_active=true`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+
+    if(!response.ok){
+        const message = await response.json();
+        console.log(message);
+        return;
+    };
+
+    const data = await response.json();
+    const taggedListings = data.data;
+
+    if(taggedListings.length > 0){
+        console.log(taggedListings);
+
+        listingsDisplay.innerHTML = '';
+
+        for(let i = 0; i < taggedListings.length; i++){
+            const item = document.createElement('div');
+            item.classList = 'flex flex-col gap-5 h-fit w-full text-center items-center justify-evenly border cursor-pointer rounded-lg border border-black bg-white dark:bg-dark-header dark:text-white shadow-lg shadow-black hover:bg-hover hover:text-white';
+
+            const image = document.createElement('img');
+            image.classList = 'h-30 w-full md:h-40 lg:h-70 rounded-lg lg:rounded-none lg:rounded-tl-lg lg:rounded-tr-lg';
+            
+            //Adding standard image if none images is provided
+            if(taggedListings[i].media.length > 0){
+                image.src = taggedListings[i].media[0].url;
+                image.alt = taggedListings[i].media[0].alt;
+            } else {
+                image.src = 'https://images.unsplash.com/vector-1773501995769-cb593aed811c?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
+                image.alt = 'Item image';
+            }
+
+            item.appendChild(image);
+
+
+            if(taggedListings[i].title.length < 25){
+                const title = document.createElement('h3');
+                title.innerHTML = taggedListings[i].title;
+                title.classList = 'hidden lg:flex p-2 justify-center text-center text-lg font-bold'
+                item.appendChild(title);
+            } else {
+                const title = document.createElement('h3');
+                title.innerHTML = `${taggedListings[i].title.slice(0,25)}...`;
+                title.classList = 'hidden lg:flex p-2 justify-center text-center text-lg font-bold'
+                item.appendChild(title);
+            }
+
+            listingsDisplay.appendChild(item);
+        };
+    } else {
+        listingsDisplay.innerHTML = '';
+        listingsDisplay.classList = 'flex w-4/5 justify-center';
+        
+        const returnMessage = document.createElement('p')
+        returnMessage.classList = 'w-full text-center text-lg my-10 dark:text-white';
+        returnMessage.innerHTML = 'Could not find any tags matching your search...'
+        listingsDisplay.appendChild(returnMessage);
+        setTimeout(() => {
+            window.location.href = '../listings/index.html'
+        }, 3000);
+    }
+})
