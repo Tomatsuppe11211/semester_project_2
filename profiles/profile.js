@@ -147,7 +147,7 @@ async function getProfileInfo(){
                         listing.classList = 'border border-black w-1/2 md:w-[10rem] lg:w-[12rem] flex flex-col gap-2 mb-5 shadow-lg shadow-black';
 
                         const listingImage = document.createElement('img');
-                        listingImage.classList = 'w-full';
+                        listingImage.classList = 'w-full h-40';
                         listingImage.alt = 'Listing image';
                         
                         if(listings[i].media.length === 0){
@@ -162,7 +162,7 @@ async function getProfileInfo(){
                         const listingTitle = document.createElement('h2');
 
                         if(listings[i].title.length > 15){
-                            listingTitle.innerHTML = `Listing ${i}`;
+                            listingTitle.innerHTML = `${listings[i].title.slice(0,15)}...`;
                         } else {
                             listingTitle.innerHTML = listings[i].title;
                         };
